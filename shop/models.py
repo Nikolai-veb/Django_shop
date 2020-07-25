@@ -1,7 +1,7 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
-
+import datetime
+from PIL import Image
 class Category(models.Model):
     """Категории"""
     name = models.CharField(max_length=50)
@@ -11,6 +11,9 @@ class Category(models.Model):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
+    def get_absolute_url(self):
+         return reverse('product_list_by_category', args=[self.slug])
+
     def __str__(self):
         return self.name
 
@@ -19,8 +22,7 @@ class Product(models.Model):
     """Товар"""
     category = models.ForeignKey(Category, verbose_name="Катеория", on_delete=models.CASCADE, related_name="products")
     name = models.CharField("Название товара", max_length=150)
-    slug = models.SlugField(max_length=150, unique=True)
-    images = models.ImageField("Изобраение", upload_to="product/", null=True, blank=True)
+    slug = models.SlugField(max_length=300, unique=True)
     discription = models.TextField("Описание")
     price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField("Склад", default=0)
@@ -31,9 +33,25 @@ class Product(models.Model):
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
+        ordering = ["-create"]
 
     def get_absolute_url(self):
-        return reverse("product_detail", kwards={"slug":self.slug})
+        return reverse("product_detail", kwargs={"slug":self.slug, "id":self.id})
+
+    def __str__(self):
+        return self.name
+
+
+class ProductImages(models.Model):
+    """Изобржение продукта"""
+    name = models.CharField("Имя", max_length=150)
+    images = models.ImageField("Изобраение", upload_to="product_images/", null=True, blank=True)
+    slug = models.SlugField(max_length=150, unique=True)
+    product = models.ForeignKey(Product, verbose_name="Товар", related_name="product_images", on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "Изображение Товара"
+        verbose_name_plural = "Изображение Товаров"
 
     def __str__(self):
         return self.name
