@@ -15,5 +15,52 @@
              <p> {{ product.discription }} </p>
          </div>
      </div>
-     
+
+
+
+<h3>
+    <span>{{ product.reviews.count  }}</span>
+</h3>
+
+
+<form "{% url 'add_review' product.id %}" method="post">
+    <input type="hidden" name="parent" id="contactparent" value="">
+    <div>
+        <label for="contactcomment" class="editContent">
+            Ваш комментарий *
+        </label>
+    {{ form.text  }}
+    </div>
+</form>
+    
+
+
+
+{% for review in product.get_review %}
+<div>
+    <div>
+        <h5>
+           {{ review.name  }}
+        </h5>
+        <p>
+           {{ review.text }}
+        </p>
+        <a href="#formReview"onclick="addReview('{{ review.name  }}', '{{ review.id  }}')">Ответить</a>
+        {% for rew in review.reviews.all %}
+            <div>
+                <a href="#">
+                    <img src="{% static 'images/te2.jpg' %}" class="img-fluid "alt="image">
+                </a>
+                <div>
+                    <h5>
+                        {{ rew.name  }}
+                    </h5>
+                    <p>{{ rew.text }}</p>
+                </div>
+            </div>
+            {% endfor %}
+    </div>
+</div>
+{% endfor %}
 {% endblock %}
+
