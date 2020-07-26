@@ -20,11 +20,14 @@
         </div>
         <div id="main" class="product-list">
            <h1>{% if category %}{{ category.name  }}{% else %}Products{% endif %}</h1>
-              {% for product in products %}
+           {% for product in products %}
+               {% for image in product.product_images.all %}   
            <div class="item">
               <a href="{{ product.get_absolute_url  }}">
-                  <img src="{% if product.images %}{{ product.images.url  }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                  <img src="{% if image.images %}{{ image.images.url  }}{% else %}{% static "img/no_image.png" %}{% endif %}" width="100" height="100" >
               </a>
+              <br>
+              {% endfor %}
               <a href="{{ product.get_absolute_url  }}">{{ product.name  }}</a>
               <br>
               ${{ product.price  }}
