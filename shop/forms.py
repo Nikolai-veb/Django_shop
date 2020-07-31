@@ -14,3 +14,14 @@ class ReviewForm(forms.ModelForm):
             "text": forms.Textarea(attrs={"class":"form-control border"}),
 
         }
+
+
+class RatingForm(forms.ModelForm):
+    """Форма добовления рейтинга"""
+    star = forms.ModelChoiceField(
+            queryset=RatingStar.objects.all(), widget=forms.RadioSelect(),empty_label=None
+            )
+
+    class Meta:
+        model = Rating
+        fields = ("star",)

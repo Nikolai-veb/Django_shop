@@ -16,51 +16,109 @@
          </div>
      </div>
 
+                    <li>
+                        <form action="{% url 'add_rating' %}" method="post" name="rating">
+                    
+                            {% csrf_token %}
+                            <input type="hidden" value="{{ product.id }}" name="movie">
+                            <span class="rating">
+                                {% for k, v in star_form.fields.star.choices %}
+                                    <input id="rating{{ v }}" type="radio" name="star"
+                                           value="{{ k }}">
+                                    <label for="rating{{ v }}">{{ k }}</label>
+                                {% endfor %}
+                            </span>
+                            <span class="editContent">4.0</span>
+                        </form>
+                    </li>
 
-
-<h3>
-    <span>{{ product.reviews.count  }}</span>
-</h3>
-
-
-<form "{% url 'add_review' product.id %}" method="post">
-    <input type="hidden" name="parent" id="contactparent" value="">
-    <div>
-        <label for="contactcomment" class="editContent">
-            Ваш комментарий *
-        </label>
-    {{ form.text  }}
-    </div>
-</form>
-    
-
-
-
-{% for review in product.get_review %}
-<div>
-    <div>
-        <h5>
-           {{ review.name  }}
-        </h5>
-        <p>
-           {{ review.text }}
-        </p>
-        <a href="#formReview"onclick="addReview('{{ review.name  }}', '{{ review.id  }}')">Ответить</a>
-        {% for rew in review.reviews.all %}
-            <div>
-                <a href="#">
-                    <img src="{% static 'images/te2.jpg' %}" class="img-fluid "alt="image">
-                </a>
-                <div>
-                    <h5>
-                        {{ rew.name  }}
+        <div class="row">
+            <div class="single-form-left">
+                <!-- contact form grid -->
+                <div class="contact-single">
+                    <h3 class="editContent">
+                        <span class="sub-tittle editContent">{{ product.reviews.count }}</span>
+                    
+                    </h3>
+                    <form action="{% url 'add_review' product.id %}" method="post" class="mt-4"
+                          id="formReview">
+                        {% csrf_token %}
+                        <input type="hidden" name="parent" id="contactparent" value="">
+                        <div class="form-group editContent">
+                            <label for="contactcomment" class="editContent">
+                                Ваш комментарий *
+                            </label>
+                            {{ form.text }}
+                        </div>
+                        <div class="d-sm-flex">
+                            <div class="col-sm-6 form-group p-0 editContent">
+                                <label for="contactusername" class="editContent">
+                                    Имя *
+                                </label>
+                                {{ form.name }}
+                            </div>
+                            <div class="col-sm-6 form-group ml-sm-3 editContent">
+                                <label for="contactemail" class="editContent">
+                                    Email *
+                                </label>
+                                {{ form.email }}
+                            </div>
+                            {{ form.captcha }}
+                        </div>
+                        <button type="submit"
+                                class="mt-3 btn btn-success btn-block py-3">
+                            Отправить
+                        </button>
+                    </form>
+                </div>
+                <!--  //contact form grid ends here -->
+            </div>
+        </div>
+        {% for review in product.get_review %}
+            <div class="media py-5">
+                <img src="{% static 'images/te2.jpg' %}" class="mr-3 img-fluid" alt="image">
+                <div class="media-body mt-4">
+                    <h5 class="mt-0 editContent">
+                        {{ review.name }}
                     </h5>
-                    <p>{{ rew.text }}</p>
+                    <p class="mt-2 editContent">
+                        {{ review.text }}
+                    </p>
+                    <a href="#formReview"
+                       onclick="addReview('{{ review.name }}', '{{ review.id }}')">Ответить</a>
+                    {% for rew in review.reviews_set.all %}
+                        <div class="media mt-5 editContent">
+                            <a class="pr-3" href="#">
+                                <img src="{% static 'images/te2.jpg' %}" class="img-fluid "
+                                     alt="image">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="mt-0 editContent">{{ rew.name }}</h5>
+                                <p class="mt-2 editContent">{{ rew.text }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-            {% endfor %}
+        {% endfor %}
     </div>
-</div>
-{% endfor %}
+    <script>
+        function addReview(name, id) {
+            document.getElementById("contactparent").value = id;
+            document.getElementById("contactcomment").innerText = `${name}, `
+        }
+
+    </script>
 {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
 
