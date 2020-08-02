@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
 
     'shop.apps.ShopConfig',
+    'cart.apps.CartCnfig',
 ]
 
 MIDDLEWARE = [
@@ -131,3 +132,7 @@ STATICFILES_DIRS = [STATIC_DIR]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+#Carzina data storage key in session
+CART_SESSION_ID = 'cart'
+
