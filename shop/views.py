@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-
 from .models import Category, Product, Review, Rating, ProductImages
 from .forms import ReviewForm
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
+from cart.forms import CartAddProductForm
 
 def product_list(request, category_slug=None):
     products = Product.objects.filter(draft=False)
@@ -19,7 +19,10 @@ def product_list(request, category_slug=None):
 
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, draft=False)
-    return render(request, "shop/product/product_detail.html", {'product':product,})
+    cart_product_form = CartAddProductForm()
+    return render(request, "shop/product/product_detail.html", {'product': product,
+                                                                'cart_product_form': cart_product_form,
+                                                                })
 
 
 class AddReview(View):

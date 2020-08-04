@@ -1,14 +1,14 @@
-from decimal import Desimal
+from decimal import Decimal
 from django.conf import settings
 from shop.models import Product
 
 
 class Cart(object):
     """Управление корзиной"""
-    def __init__(self):
+    def __init__(self, request):
         """Инциализацыя обьекта корзины"""
         self.session = request.session
-        cart = self.session(settings.CART_SESSION_ID)
+        cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
             #Сохраняем в пустую корзину
             cart = self.session[settings.CART_SESSION_ID] = {}
@@ -48,4 +48,18 @@ class Cart(object):
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
         yield item
+
+    def __len__(self):
+        """Возвращает общее количество товаров в корзине."""
+        return sum(item['quantity'] for item in self.cart.values())
+
+    def get_total_price(self):
+        """Возращает общую стоимость корзины"""
+        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+
+    def clear(self):
+        """Очистка корзины"""
+        del self.session[settings.CART_SESSION_ID]
+        self.save()
+
 
