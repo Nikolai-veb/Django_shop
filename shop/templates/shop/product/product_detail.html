@@ -6,23 +6,11 @@
      <div class="product-detail">
         {% for image in product.product_images.all %}
        <img src="{{ image.images.url  }}" width="150"height="150" >
-       {% endfor %}   
-        <h2>
-           <a href="{{ product.category.get_absolute_url  }}">{{ product.category }}</a>
-        </h2>
-        <p class="price">${{ product.price  }}</p>
-
-        <form action="{% url "cart_add" product.id %}" method="post">
-             {{ cart_product_form  }}
-              {% csrf_token %}
-               <input type="submit" value="Add to cart">
-        </form>
-
-         <div>
-             <p> {{ product.discription }} </p>
-         </div>
-     </div>
-
+   {% endfor %}  
+              
+            <br>
+            
+             <div >
                     <li>
                         <form action="{% url 'add_rating' %}" method="post" name="rating">
                     
@@ -38,6 +26,30 @@
                             <span class="editContent">4.0</span>
                         </form>
                     </li>
+             </div>
+             <br>
+        <h2>
+           <a href="{{ product.category.get_absolute_url  }}">{{ product.category }}</a>
+        </h2>
+        
+        <p class="price">${{ product.price  }}</p>
+
+        <div>
+             <p> {{ product.discription }} </p>
+         </div>
+     </div>
+
+
+       <div class="cart">
+            <form action="{% url "cart_add" product.id %}" method="post">
+             {{ cart_product_form  }}
+              {% csrf_token %}
+               <input type="submit" value="Add to cart">
+            </form>
+        </div>
+
+        
+
 
         <div class="row">
             <div class="single-form-left">
@@ -48,7 +60,7 @@
                     
                     </h3>
                     <form action="{% url 'add_review' product.id %}" method="post" class="mt-4"
-                          id="formReview">
+                          id="review_form">
                         {% csrf_token %}
                         <input type="hidden" name="parent" id="contactparent" value="">
                         <div class="form-group editContent">
@@ -91,9 +103,9 @@
                     <p class="mt-2 editContent">
                         {{ review.text }}
                     </p>
-                    <a href="#formReview"
-                       onclick="addReview('{{ review.name }}', '{{ review.id }}')">Ответить</a>
-                    {% for rew in review.reviews_set.all %}
+                    <a href="#ReviewForm"
+                       onclick="add_review('{{ review.name }}', '{{ review.id }}')">Ответить</a>
+                    {% for rew in review.reviews.all %}
                         <div class="media mt-5 editContent">
                             <a class="pr-3" href="#">
                                 <img src="{% static 'images/te2.jpg' %}" class="img-fluid "
@@ -110,22 +122,10 @@
         {% endfor %}
     </div>
     <script>
-        function addReview(name, id) {
+        function add_review(name, id) {
             document.getElementById("contactparent").value = id;
             document.getElementById("contactcomment").innerText = `${name}, `
         }
 
     </script>
 {% endblock %}
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,9 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product, Review, Rating, ProductImages
-from .forms import ReviewForm
+from .forms import ReviewForm, RatingForm
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
 from cart.forms import CartAddProductForm
+
 
 def product_list(request, category_slug=None):
     products = Product.objects.filter(draft=False)
@@ -17,19 +18,24 @@ def product_list(request, category_slug=None):
                                                          'category':category,
                                                          })
 
+
 def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, draft=False)
+    star_form = RatingForm()
     cart_product_form = CartAddProductForm()
+    review_form = ReviewForm()
     return render(request, "shop/product/product_detail.html", {'product': product,
                                                                 'cart_product_form': cart_product_form,
+                                                                'star_form': star_form,
+                                                                'review_form': review_form,
                                                                 })
 
 
-class AddReview(View):
-    """ Отзовы """
-    def post(self, request, pk):
-        form = ReviewForm(request.POST)
-        product = Product.objects.get(id=pk, draft=False)
+def add_review(self, request, pk):
+    """Отзовы"""
+    product = Product.objects.get(id=pk, draft=False)
+    if request.method == 'Post':
+        form = ReviewForm(request.Post)
         if form.is_valid():
             form = form.save(commit=False)
             if  request.POST.get("parent", None):
@@ -39,18 +45,19 @@ class AddReview(View):
         return redirect(product.get_absolute_url())
 
 
-class AddStarRating(View):
+def get_client_ip(self, request):
+    """Получение клиенского ip"""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+def add_rating_star(self, request):
     """Добавление рейтинга к фильму"""
-    def get_client_ip(self, request):
-        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-        if x_forwarded_for:
-            ip = x_forwarded_for.split(',')[0]
-        else:
-            ip = request.META.get('REMOTE_ADDR')
-        return ip
-
-
-    def post(self, request):
+    if request.method == 'Post':
         form = RatingForm(request.POST)
         if form.is_valid():
             Rating.objects.update_or_create(
