@@ -22,16 +22,21 @@
     <div class="pushmenu pushmenu-left cart-box-container">
         <div class="cart-list">
             <span class="close-left js-close">x</span>
-            <h3 class="cart-title">Your Cart</h3>
+            {% with total_items=cart|length %}                                                                                                       {% if cart|length > 0 %}
+                <h3 class="cart-title">Your Cart</h3>
+                <a href="{% url "cart_detail" %}">{{ total_items }} item{{ total_items|pluralize }}: ${{ cart.get_total_price }}
+                </a>
+                {% else %}
             <div class="nocart-list">
                 <div class="empty-cart">
                     <h4 class="nocart-title">No products in the cart.</h4>
+                    {% endif %}
+                   {% endwith %}
+                    </div>
                     <a href="" class="btn-shop btn-arrow">Start shopping</a>
                 </div>
             </div>
-            <div class="cart-bottom">
-                <a href="#" class="text">Our Shipping & Return Policy</a>
-            </div>
+        
             <!-- End cart bottom -->
         </div>
     </div>
@@ -94,7 +99,7 @@
                 </div>
                 <!--end topbar-left-->
                 <div class="logo hidden-xs hidden-sm">
-                    <a href="" title="home-logo"><img src="img/cosre.png" alt="logo" class="img-reponsive"></a>
+                    <a href="" title="home-logo"><img src="{% static  "img/cosre.png" %}" alt="logo" class="img-reponsive"></a>
                 </div>
                 <!--end logo-->
                 <div class="topbar-right">
@@ -116,10 +121,17 @@
                             </div>
                         </div>
                         <div class="topbar-cart">
-                            <a href="#" class="icon-cart">
+                             {% with total_items=cart|length %}
+                                  {% if cart|length > 0 %}
+                                      <a href="#" class="icon-cart">
+                                <i class="icon-basket f-15"></i>
+                                <span class="count cart-count">{{ total_items  }}</span>
+                            {% else %}
                                 <i class="icon-basket f-15"></i>
                                 <span class="count cart-count">0</span>
-                            </a>
+                                 {% endif %}
+                                  {% endwith %}
+                                      </a>
                         </div>
                     </div>
                     <!--end topbar-option-->
@@ -132,7 +144,7 @@
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="logo-mobile hidden-lg hidden-md">
-                            <a href="" title="home-logo"><img src="img/cosre.png" alt="logo" class="img-reponsive"></a>
+                            <a href="/" title="home-logo"><img src="{% static  "img/cosre.png" %}" alt="logo" class="img-reponsive"></a>
                         </div>
                         <!--end logo-->
                         <button type="button" class="navbar-toggle icon-mobile" data-toggle="collapse" data-target="#myNavbar">
@@ -141,20 +153,17 @@
                         <nav class="navbar main-menu">
                             <div class="collapse navbar-collapse" id="myNavbar">
                                 <ul class="nav navbar-nav js-menubar">
-                                    <li class="level1 active dropdown"><a href="#">Home</a>
+                                    <li class="level1 active dropdown"><a href="#">Категории</a>
                                         <span class="plus js-plus-icon"></span>
                                         <ul class="dropdown-menu menu-level-1">
-                                            <li class="level2"><a href="home-simple.html" title="Home Simple">Home Simple</a></li>
-                                            <li class="level2"><a href="home_clean.html" title="Home Clean">Home Clean</a></li>
-                                            <li class="level2"><a href="home_bestselling.html" title="Home Bestselling">Home Bestselling</a></li>
-                                            <li class="level2"><a href="home_instagrams.html" title="Home Instagram Shop">Home Instagram Shop</a></li>
-                                            <li class="level2"><a href="home_cat_metro.html" title="Home Cat Metro">Home Cat Metro</a></li>
-                                            <li class="level2"><a href="home_categories_slider_fullwidth.html" title="Home Categories Slider">Home Categories Slider</a></li>
-                                            <li class="level2"><a href="home_cate.html" title="Home Categories">Home Categories</a></li>
-                                            <li class="level2"><a href="home_parallax.html" title="Home Parallax">Home Parallax</a></li>
-                                            <li class="level2"><a href="home_fullslider.html" title="Home Fullslider">Home Fullslider</a></li>
-                                            <li class="level2"><a href="home_lookbook.html" title="Home Lookbook">Home Lookbook</a></li>
-                                            <li class="level2"><a href="home-minimal.html" title="Home Minimal">Home Minimal</a></li>
+                                                <li {% if not category %} class="level2" {% endif %}>
+                                                    <a href="{% url "product_list" %}" title="Home">Главная</a>
+                                                </li>
+                                                {% for c in categories %}
+                                                <li {% if category.slug == c.slug %} class="level2" {% endif %}>
+                                                    <a href="{{ c.get_absolute_url   }}" title="Home Clean">{{ c.name }}</a>
+                                                </li>
+                                                {% endfor %}
                                         </ul>
                                     </li>
                                     <li class="level1 dropdown hassub"><a href="#">Shop</a>
@@ -169,7 +178,7 @@
                                                         <li class="level3"><a href="checkout.html" title="Checkout">Checkout</a></li>
                                                     </ul>
                                                     <div class="mega-product col-6">
-                                                        <a href="#"><img src="img/mega_1.jpg" alt="" class="img-responsive"></a>
+                                                        <a href="#"><img src="{% static "img/mega_1.jpg" %}" alt="" class="img-responsive"></a>
                                                     </div>
                                                     <div class="cleafix"></div>
                                                 </li>
@@ -188,7 +197,7 @@
                                                         <li class="level3"><a href="single_product_sticky_detail.html" title="Product Sticky Detail">Product Sticky Detail</a></li>
                                                     </ul>
                                                     <div class="mega-product col-6">
-                                                        <a href="#"><img src="img/mega_2.jpg" alt="" class="img-responsive"></a>
+                                                        <a href="#"><img src="{% static  "img/mega_2.jpg" %}" alt="" class="img-responsive"></a>
                                                     </div>
                                                     <div class="cleafix"></div>
                                                 </li>
