@@ -2,65 +2,119 @@
 {% load static %}
 {% block content %}
 
-    <title>{% block title %} {{ product.name }} {% endblock %}</title>
-     <div class="product-detail">
-        {% for image in product.product_images.all %}
-       <img src="{{ image.images.url  }}" width="150"height="150" >
-   {% endfor %}  
-              
-            <br>
-            
-             <div >
-                    <li>
-                        <form action="{% url 'add_rating' %}" method="post" name="rating">
-                    
-                            {% csrf_token %}
-                            <input type="hidden" value="{{ product.id }}" name="movie">
-                            <span class="rating">
-                                {% for k, v in star_form.fields.star.choices %}
-                                    <input id="rating{{ v }}" type="radio" name="star"
-                                           value="{{ k }}">
-                                    <label for="rating{{ v }}">{{ k }}</label>
-                                {% endfor %}
-                            </span>
-                            <span class="editContent">4.0</span>
-                        </form>
-                    </li>
-             </div>
-             <br>
-        <h2>
-           <a href="{{ product.category.get_absolute_url  }}">{{ product.category }}</a>
-        </h2>
-        
-        <p class="price">${{ product.price  }}</p>
+{% block title %} {{ product.name  }} {% endblock %}</title>
+        <!-- Template -->
 
-        <div>
-             <p> {{ product.discription }} </p>
-         </div>
-     </div>
-
-
-       <div class="cart">
-            <form action="{% url "cart_add" product.id %}" method="post">
-             {{ cart_product_form  }}
-              {% csrf_token %}
-               <input type="submit" value="Add to cart">
-            </form>
+        <div class="cmage in product.product_images.all %} ntainer container-42">
+            <ul class="breadcrumb">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Man</a></li>
+                <li class="active"><a href="#">Hooded Coat</a></li>
+            </ul>
         </div>
+        <div class="container">
+            <div class="single-product-detail product-bundle single-product-space v3">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-5 col-md-6">
+                        <div class="product-images">
+                            <div class="main-img js-product-slider">
+                                <a href="#" class="hover-images effect"><img src="{% if product.poster %}{{ product.poster.url  }}{% else %}{% static "img/bottle.jpg" %}{% endif %}" alt="photo" class="img-reponsive"></a>
+                                </div>
+                            <div class="cosre-btn">
+                                <div class="btn-360" data-toggle="modal" data-target="#my360">
+                                    <a href="#">360 DEGREE view</a>
+                                </div>
+                            </div>
+                        </div>
+                
+                        <div class="multiple-img-list-ver2 js-click-product">
+                            <div class="product-col">
+                                <div class="img">
+                                    <p>
+                                        {% for image in product.product_images.all %}
+                                    <img src="{% if image.images %}{{ image.images.url }}{% else %}{% static "img/bottle.jpg" %}{% endif %}" alt="images" class="img-responsive">
+                                    {% endfor %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                    <div class="col-xs-12 col-sm-7 col-md-6">
+                        <div class="single-product-info">
+                            <div class="rating-star">
+                                <div class="icon-rating">
+                                    <span class="star star-5"></span>
+                                    <span class="star star-4"></span>
+                                    <span class="star star-3"></span>
+                                    <span class="star star-2"></span>
+                                    <span class="star star-1"></span>
+                                </div>
+                                <span class="review">({{ product.reviews.count  }}  customer review)</span>
+                            </div>
+                            <h3 class="product-title"><a href="#">360 Degree View</a></h3>
+                            <div class="product-price">
+                                <span>${{ product.price }}</span>
+                            </div>
+                            <p class="product-desc">{{ product.discription  }}</p>
+                            
+                            <div class="action v6">
+                                
+                                <div class="cart">                      
+                                    <form action="{% url "cart_add" product.id %}" method="post">
+                                        {{ cart_product_form }} 
+                                        <div>
+                                            <a href="#" class="link-ver1 wish"><i class="icon-heart f-15"></i></a>
+                                        </div>
+                                        {% csrf_token %}                                                                                                                      <input type="submit" class="link-ver1 add-cart" value="Add to cart">      
+                                </form>                                         
+                            </div>
+                                                                                  
+                                <div class="clearfix"></div>
+                            </div>
 
-        
 
+                         <div>
+                            <div class="share-social">
+                                <span>Share :</span>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-google-plus"></i></a>
+                                <a href="#"><i class="fa fa-pinterest-p"></i></a>
+                            </div>
+                        </div>
 
-        <div class="row">
-            <div class="single-form-left">
-                <!-- contact form grid -->
-                <div class="contact-single">
-                    <h3 class="editContent">
-                        <span class="sub-tittle editContent">{{ product.reviews.count }}</span>
-                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--single-product-detail-->
+            <div class="single-product-tab">
+                <ul class="nav nav-tabs nav-space text-center">
+                    <li class="active"><a data-toggle="pill" href="#desc">Description</a></li>
+                    <li><a data-toggle="pill" href="#review">Reviews ({{ product.reviews.count  }})</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="desc" class="tab-pane fade in active">
+                        <div class="img">
+                            <a href="#" class=""><img src="{% if product.poster %}{{ product.poster.url   }}{% else %}{% static "img/casual-male-outfit.jpg" %}{% endif %}"  alt="photo" class="img-reponsive" ></a>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <p class="space-margin-top-50">{{product.discription}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="review" class="tab-pane fade in ">
+                        
+                      <div class="row">
+                         <div class="single-form-left">
+                                <!-- contact form grid -->
+                            <div class="contact-single">
+                               <h3 class="editContent">
+                        Оставить отзыв
                     </h3>
-                    <form action="{% url 'add_review' product.id %}" method="post" class="mt-4"
-                          id="review_form">
+                    <form action="{% url 'add_review' product.id %}" method="post" class="mt-4" id="formReview">
                         {% csrf_token %}
                         <input type="hidden" name="parent" id="contactparent" value="">
                         <div class="form-group editContent">
@@ -82,10 +136,8 @@
                                 </label>
                                 {{ form.email }}
                             </div>
-                            {{ form.captcha }}
                         </div>
-                        <button type="submit"
-                                class="mt-3 btn btn-success btn-block py-3">
+                        <button type="submit" class="mt-3 btn btn-success btn-block py-3">
                             Отправить
                         </button>
                     </form>
@@ -93,7 +145,7 @@
                 <!--  //contact form grid ends here -->
             </div>
         </div>
-        {% for review in product.get_review %}
+        {% for review in product.reviews.all %}
             <div class="media py-5">
                 <img src="{% static 'images/te2.jpg' %}" class="mr-3 img-fluid" alt="image">
                 <div class="media-body mt-4">
@@ -103,7 +155,7 @@
                     <p class="mt-2 editContent">
                         {{ review.text }}
                     </p>
-                    <a href="#ReviewForm"
+                    <a href="#formReview"
                        onclick="add_review('{{ review.name }}', '{{ review.id }}')">Ответить</a>
                     {% for rew in review.reviews.all %}
                         <div class="media mt-5 editContent">
@@ -121,11 +173,190 @@
             </div>
         {% endfor %}
     </div>
+                    </div>
+                </div>
+            </div>
+            <!--single-product-tab-->
+        </div>
+        <div class="information">
+            <ul>
+                <li class="info-center text-center"><span>SKU :</span>
+                    <a href="">004004</a>
+                </li>
+                <li class="info-center bd-rl text-center"><span>Categories :</span>
+                    <a href="">Hoodies</a>,
+                    <a href="">Accessories</a>
+                </li>
+                <li class="info-center text-center"><span>Tags :</span>
+                    <a href="">Designer</a>,
+                    <a href="">Tech</a>
+                </li>
+            </ul>
+        </div>
+        <div class="product-related">
+            <div class="container container-42">
+                <h3 class="title text-center">Related Products</h3>
+                <div class="owl-carousel owl-theme js-owl-product">
+                    <div class="product-item">
+                        <div class="product-images">
+                            <a href="#" class="hover-images effect"><img src="{% static "img/products/highheels.jpg" %}" alt="products" class="img-reponsive"></a>
+                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                            <a href="#" class="btn-quickview">QUICK VIEW</a>
+                        </div>
+                        <div class="product-info-ver2">
+                            <h3 class="product-title"><a href="#">Tia Slides in Brandy</a></h3>
+                            <div class="product-after-switch">
+                                <div class="product-price">$295.00</div>
+                                <div class="product-after-button">
+                                    <a href="#" class="addcart">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="rating-star">
+                                <span class="star star-5"></span>
+                                <span class="star star-4"></span>
+                                <span class="star star-3"></span>
+                                <span class="star star-2"></span>
+                                <span class="star star-1"></span>
+                            </div>
+                            <div class="product-price">$292.00</div>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-images">
+                            <a href="#" class="hover-images effect"><img src="{% static "img/products/hoodie.jpg" %}" alt="photo" class="img-reponsive">
+                    <div class="ribbon-sale ver2"><span>sale</span></div>
+                    </a>
+                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                            <a href="#" class="btn-quickview">QUICK VIEW</a>
+                        </div>
+                        <div class="product-info-ver2">
+                            <h3 class="product-title"><a href="#">Alabama Tee</a></h3>
+                            <div class="product-after-switch">
+                                <div class="product-price">$295.00</div>
+                                <div class="product-after-button">
+                                    <a href="#" class="addcart">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="rating-star">
+                                <span class="star star-5"></span>
+                                <span class="star star-4"></span>
+                                <span class="star star-3"></span>
+                                <span class="star star-2"></span>
+                                <span class="star star-1"></span>
+                            </div>
+                            <div class="product-price">$292.00</div>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-images">
+                            <a href="#" class="hover-images effect"><img src="{% static "img/products/bag_1.jpg" %}" alt="photo" class="img-reponsive">
+                    <div class="ribbon-new ver2"><span>new</span></div>
+                    </a>
+                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                            <a href="#" class="btn-quickview">QUICK VIEW</a>
+                        </div>
+                        <div class="product-info-ver2">
+                            <h3 class="product-title"><a href="#">Denali Blanket Scarf</a></h3>
+                            <div class="product-after-switch">
+                                <div class="product-price">$295.00</div>
+                                <div class="product-after-button">
+                                    <a href="#" class="addcart">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="rating-star">
+                                <span class="star star-5"></span>
+                                <span class="star star-4"></span>
+                                <span class="star star-3"></span>
+                                <span class="star star-2"></span>
+                                <span class="star star-1"></span>
+                            </div>
+                            <div class="product-price">$292.00</div>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-images">
+                            <a href="#" class="hover-images effect"><img src="{% static "img/products/long.jpg" %}" alt="photo" class="img-reponsive">
+                    <div class="ribbon-sale ver2"><span>sale</span></div>
+                    </a>
+                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                            <a href="#" class="btn-quickview">QUICK VIEW</a>
+                        </div>
+                        <div class="product-info-ver2">
+                            <h3 class="product-title"><a href="#">Flannel Button Under</a></h3>
+                            <div class="product-after-switch">
+                                <div class="product-price">$295.00</div>
+                                <div class="product-after-button">
+                                    <a href="#" class="addcart">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="rating-star">
+                                <span class="star star-5"></span>
+                                <span class="star star-4"></span>
+                                <span class="star star-3"></span>
+                                <span class="star star-2"></span>
+                                <span class="star star-1"></span>
+                            </div>
+                            <div class="product-price">$292.00</div>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-images">
+                            <a href="#" class="hover-images effect"><img src="{% static "img/products/sunglasses_1.jpg" %}" alt="photo" class="img-reponsive"></a>
+                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+                            <a href="#" class="btn-quickview">QUICK VIEW</a>
+                        </div>
+                        <div class="product-info-ver2">
+                            <h3 class="product-title"><a href="#">Large Cube Planter</a></h3>
+                            <div class="product-after-switch">
+                                <div class="product-price">$295.00</div>
+                                <div class="product-after-button">
+                                    <a href="#" class="addcart">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="rating-star">
+                                <span class="star star-5"></span>
+                                <span class="star star-4"></span>
+                                <span class="star star-3"></span>
+                                <span class="star star-2"></span>
+                                <span class="star star-1"></span>
+                            </div>
+                            <div class="product-price">$292.00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
     <script>
         function add_review(name, id) {
             document.getElementById("contactparent").value = id;
             document.getElementById("contactcomment").innerText = `${name}, `
         }
 
+    </script>
+    
+    <script>
+    window.onload = init;
+
+    var car;
+
+    function init() {
+
+        car = $('.js-product-360').ThreeSixty({
+            totalFrames: 18, // Total no. of image you have for 360 slider
+            endFrame: 18, // end frame for the auto spin animation
+            currentFrame: 1, // This the start frame for auto spin
+            imgList: '.threesixty_images', // selector for image list
+            progress: '.spinner', // selector to show the loading progress
+            imagePath: 'img/product-360/', // path of the image assets
+            filePrefix: '', // file prefix if any
+            ext: '.jpg', // extention for the assets
+            navigation: true
+        });
+
+    }
     </script>
 {% endblock %}

@@ -49,6 +49,9 @@ class ProductAdmin(admin.ModelAdmin):
             "fields":("slug",)
         }),
         (None,{
+            "fields":("poster",)
+        }),
+        (None,{
             "fields":(("price", "stock", "draft"))
         }),
        # (None,{

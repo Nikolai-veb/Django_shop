@@ -17,30 +17,6 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}">
      </head>
   <body>
-
-       <!--push menu cart -->
-    <div class="pushmenu pushmenu-left cart-box-container">
-        <div class="cart-list">
-            <span class="close-left js-close">x</span>
-            {% with total_items=cart|length %}                                                                                                       {% if cart|length > 0 %}
-                <h3 class="cart-title">Your Cart</h3>
-                <a href="{% url "cart_detail" %}">{{ total_items }} item{{ total_items|pluralize }}: ${{ cart.get_total_price }}
-                </a>
-                {% else %}
-            <div class="nocart-list">
-                <div class="empty-cart">
-                    <h4 class="nocart-title">No products in the cart.</h4>
-                    {% endif %}
-                   {% endwith %}
-                    </div>
-                    <a href="" class="btn-shop btn-arrow">Start shopping</a>
-                </div>
-            </div>
-        
-            <!-- End cart bottom -->
-        </div>
-    </div>
-    <!-- End cart -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
             <!-- Modal content-->
@@ -99,7 +75,7 @@
                 </div>
                 <!--end topbar-left-->
                 <div class="logo hidden-xs hidden-sm">
-                    <a href="" title="home-logo"><img src="{% static  "img/cosre.png" %}" alt="logo" class="img-reponsive"></a>
+                    <a href="/" title="home-logo"><img src="{% static  "img/cosre.png" %}" alt="logo" class="img-reponsive"></a>
                 </div>
                 <!--end logo-->
                 <div class="topbar-right">
@@ -123,7 +99,7 @@
                         <div class="topbar-cart">
                              {% with total_items=cart|length %}
                                   {% if cart|length > 0 %}
-                                      <a href="#" class="icon-cart">
+                                      <a href="{% url "cart_detail" %}" class="icon-cart">
                                 <i class="icon-basket f-15"></i>
                                 <span class="count cart-count">{{ total_items  }}</span>
                             {% else %}

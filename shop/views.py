@@ -23,25 +23,25 @@ def product_detail(request, id, slug):
     product = get_object_or_404(Product, id=id, slug=slug, draft=False)
     star_form = RatingForm()
     cart_product_form = CartAddProductForm()
-    review_form = ReviewForm()
+    form = ReviewForm()
     return render(request, "shop/product/product_detail.html", {'product': product,
                                                                 'cart_product_form': cart_product_form,
                                                                 'star_form': star_form,
-                                                                'review_form': review_form,
+                                                                'form': form,
                                                                 })
 
 
-def add_review(self, request, pk):
+def add_review(request, pk):
     """Отзовы"""
     product = Product.objects.get(id=pk, draft=False)
-    if request.method == 'Post':
-        form = ReviewForm(request.Post)
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
         if form.is_valid():
             form = form.save(commit=False)
             if  request.POST.get("parent", None):
-                form.parent_id =init(request.POST.get("parent"))
-                form.product = product
-                form.save()
+                form.parent_id = (request.POST.get("parent"))
+            form.product = product
+            form.save()
         return redirect(product.get_absolute_url())
 
 
