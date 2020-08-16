@@ -57,6 +57,13 @@ class Cart(object):
         """Возращает общую стоимость корзины"""
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
+    def list_items(self):
+        product_ids = self.cart.keys()
+        products = Product.objects.filter(id__in=product_ids)
+        return products
+
+
+
     def clear(self):
         """Очистка корзины"""
         del self.session[settings.CART_SESSION_ID]
