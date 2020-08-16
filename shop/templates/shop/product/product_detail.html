@@ -3,6 +3,26 @@
 {% block content %}
 
 {% block title %} {{ product.name  }} {% endblock %}</title>
+
+
+<div class="modal fade" id="my360" role="dialog">
+        <div class="modal-dialog">
+            <div class="product-360-view-wrapper modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                </div>
+                <div class="threesixty js-product-360">
+                    <div class="spinner">
+                        <span>0%</span>
+                    </div>
+                    <ol class="threesixty_images"></ol>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
         <!-- Template -->
 
         <div class="cmage in product.product_images.all %} ntainer container-42">
@@ -28,15 +48,16 @@
                         </div>
                 
                         <div class="multiple-img-list-ver2 js-click-product">
+                            {% for image in product.product_images.all %}
                             <div class="product-col">
                                 <div class="img">
                                     <p>
-                                        {% for image in product.product_images.all %}
-                                    <img src="{% if image.images %}{{ image.images.url }}{% else %}{% static "img/bottle.jpg" %}{% endif %}" alt="images" class="img-responsive">
-                                    {% endfor %}
+                                    <img src="{% if image.images %}{{ image.images.url }}{% else %}{% static "img/bottle.jpg" %}{% endif %}" alt="images" class="img-responsive" width="150" height="200">
+
                                     </p>
                                 </div>
                             </div>
+                             {% endfor %}
                         </div>
     
                     </div>

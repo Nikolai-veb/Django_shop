@@ -132,15 +132,16 @@
     </div>
 
     <!-- Poduct list -->
-    {% for product in products %}
+
     <div class="product-standard product-grid">
         <div class="container container-42">
             <div class="tab-content">
                 <div id="all" class="tab-pane fade in active">
                     <div class="row">
+                         {% for product in products %}
                         <div class="col-md-15 col-sm-3 col-xs-6 product-item">
                             <div class="product-images">
-                                <a href="{{ product.get_absolute_url }}" class="hover-images effect"><img src="{% if product.poster %}{{ product.poster.url }}{% else %}{% static "img/products/shortshirt.jpg" %}{% endif %}" alt="photo" class="img-reponsive"></a>
+                                <a href="{{ product.get_absolute_url }}" class="hover-images effect"><img src="{% if product.poster %}{{ product.poster.url }}{% else %}{% static "img/products/shortshirt.jpg" %}{% endif %}" alt="photo" class="img-reponsive" width="516" height="350"></a>
                                 <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
                                 <a href="{{ product.get_absolute_url }}" class="btn-quickview">QUICK VIEW</a>
                             </div>
@@ -160,7 +161,9 @@
                                     <span class="star star-1"></span>
                                 </div>
                                 <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
-                                <div class="product-price">${{ product.price }}</div>
+                                <div class="product-pRU
+9+
+rice">${{ product.price }}</div>
                                 <div class="button-group">
                                     <a href="{% url "cart_add" product.id %}" class="button add-to-cart">Add to cart</a>
                                     <a href="#" class="button add-to-wishlist">Add to wishlist</a>
@@ -169,7 +172,7 @@
                                 
                             </div>
                         </div>
-                        {% endfor %}
+
                    <!-- Paginaion
                     <div class="pagination-container pagination-blog button-v text-center">
                         <nav>
@@ -185,6 +188,7 @@
                             </ul>
                         </nav>
                     </div> -->
+                        {% endfor %}
                   </div> 
                 </div>
             </div>
