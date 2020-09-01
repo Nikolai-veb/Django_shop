@@ -150,7 +150,11 @@
                                 <div class="product-after-switch">
                                     <div class="product-price">${{ product.price }}</div>
                                     <div class="product-after-button">
-                                        <a href="{% url "cart_add" product.id %}" class="addcart">ADD TO CART</a>
+                                        <form action="{% url "cart_add" product.id %}" method="post">
+                                            {% csrf_token %}
+                                            {{ cart_product_form  }}
+                                             <input type="submit" value="ADD TO CART" class="addcar">
+                                        </form>
                                     </div>
                                 </div>
                                 <div class="rating-star">
@@ -165,7 +169,14 @@
 9+
 rice">${{ product.price }}</div>
                                 <div class="button-group">
-                                    <a href="{% url "cart_add" product.id %}" class="button add-to-cart">Add to cart</a>
+                                  <div>
+                                    <form action="{% url "cart_add" product.id %}" method="post">
+                                        {% csrf_token %}
+                                        {{ cart_product_form   }}       
+                                        <input type="submit" value="ADD" class="button add-to-cart">    
+                                    </form>
+                                  </div>
+                                  <br>
                                     <a href="#" class="button add-to-wishlist">Add to wishlist</a>
                                     <a href="{{ product.get_absolute_url }}" class="button add-view">Quick view</a>
                                 </div>

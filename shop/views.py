@@ -10,12 +10,14 @@ def product_list(request, category_slug=None):
     products = Product.objects.filter(draft=False)
     category = None
     categories = Category.objects.all()
+    cart_product_form = CartAddProductForm()
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = Product.objects.filter(category=category)
     return render(request, "shop/product/product_list.html", {'products':products,
                                                          'categories':categories,
                                                          'category':category,
+                                                         'cart_product_form': cart_product_form,
                                                          })
 
 
