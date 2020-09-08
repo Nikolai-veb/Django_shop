@@ -1,0 +1,46 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title%}{{profiles.first_name}}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-sm-6">
+            <div class="card hovercard">
+                <div class="cardheader">
+                
+                </div>
+                <div class="avatar">
+                    <img src="{{ profiles.photo.url  }}" alt="">
+                </div>
+                <div class="info">
+                    <div class="title">
+                        <a target="_blank" href="#">{{ profiles.nikname  }}</a>
+                    </div>
+                    {% if request.user.is_authenticated %}
+                        <div class="desc">{{ request.user.first_name }} {{ request.user.last_name }} </div>
+                        <div class="desc">{{ request.user.email }}</div>
+                    <div class="desc"></div>
+                    <div class="desc">
+                        <a href="{% url "edit" %}">Редактировать </a>
+                    </div>
+                    {% endif %}
+                </div>
+                <div class="bottom">
+                    <a class="btn btn-primary btn-twitter btn-sm" href="">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a class="btn btn-danger btn-sm" href="" rel="publisher">
+                        <i class="fa fa-google-plus"></i>
+                    </a>
+                    <a class="btn btn-primary btn-sm" href="" rel="publisher">
+                        <i class="fa fa-facebook"></i>
+                    </a>
+                    <a class="btn btn-warning btn-sm" href="" rel="publisher">
+                        <i class="fa fa-behance"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

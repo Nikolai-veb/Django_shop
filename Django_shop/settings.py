@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
 
     'shop.apps.ShopConfig',
+    'cart.apps.CartConfig',
+    'orders.apps.OrdersConfig',
+    'account.apps.AccountConfig',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +60,7 @@ ROOT_URLCONF = 'Django_shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -65,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'cart.context_processors.cart',
             ],
         },
     },
@@ -131,3 +135,11 @@ STATICFILES_DIRS = [STATIC_DIR]
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+#Carzina data storage key in session
+CART_SESSION_ID = 'cart'
+
+
+LOGIN_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

@@ -1,0 +1,113 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+{% block title %}Your shopping cart{% endblock %}
+{% block content %}
+
+
+<!--main content-->
+  <div class="main-content">
+    <div class="cart-box-container-ver2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h3>Shopping Cart</h3>
+             <table class="table cart-table space-30">
+                 <tbody>
+                  {% for item in cart %}
+                  {% with  product=item.product %}
+
+                  <tr class="item_cart">
+                      <td class="product-photo"><a href="{{ product.get_absolute_url }}"><img src="{% if product.poster %} {{ product.poster.url }}{% else %}{% static "img/bottle.jpg" %}{% endif %}" alt="Futurelife"></a></td>
+                      <td class="produc-name"><a href="{{ product.get_absolute_url  }}" title="">{{ product.name }}</a>
+                                            <div class="quantity input-group">
+                                                <form action="{% url "cart_add" product.id %}" method="post">
+                                                    {{ item.update_quantity_form.quantity  }}
+
+                                
+                                                  {{ item.update_quantity_form.update  }}
+                                                  <input type="submit" value="Update">
+                                         {% csrf_token %}
+                                           </form>
+                                            </div>
+                                        </td>
+                                        <td class="total-price">
+                                            <a class="remove" href="{% url "cart_remove" product.id%}" title="">
+                                                x
+                                            </a>
+                                            <p class="price">{{ product.price }}</p>
+                                            <p class="price">{{ item.total_price   }}</p>
+                                        </td>
+                                     </tr>
+                            {% endwith %}
+                             {% endfor %}
+
+                                </tbody>
+                            </table>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6">
+                                    <a href="{% url "product_list" %}" class="btn link-button hover-black continue">Continue Shopping</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End contact-form -->
+                        <div class="col-md-4">
+                            <h3>Coupon</h3>
+                            <div class="contact-form coupon">
+                                <form class="">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control input-cart" id="inputfname" placeholder="Coupon Code">
+                                        <button value="Submit" class="btn link-button link-button-v2 hover-white color-red" type="submit">Apply coupon</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <h3>Cart Totals</h3>
+                            <div class="text-price">
+                                <ul>
+                                    <li><span class="text">Subtotal</span><span class="number">{{ cart.get_total_price   }}</span></li>
+                                    <li><span class="text">Shipping</span>
+                                        <div class="payment">
+                                            <form action="#">
+                                                <input type="radio" name="gender" value="Flat" id="radio1" checked="checked">
+                                                <label for="radio1">Free Shipping</label>
+                                                <input type="radio" name="gender" value="Free" id="radio2">
+                                                <label for="radio2">Standard <span class="number">$20.00</span></label>
+                                                <input type="radio" name="gender" value="Delivery" id="radio3">
+                                                <label for="radio3">Local Pickup</label>
+                                            </form>
+                                        </div>
+                                    </li>
+                                    <li><span class="text calculate">Calculate shipping</span>
+                                        <form class="zipcode" action="#">
+                                            <input type="text" class="form-control input-cart" placeholder="Zipcode">
+                                        </form>
+                                    </li>
+                                    <li><span class="text">Totals</span><span class="number">$89.00</span></li>
+                                </ul>
+                            </div>
+                            <a class="btn link-button hover-white checkout" href="{% url "order_create" %}" title="Proceed to checkout">Proceed to checkout</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- End container -->
+            </div>
+            <!-- End cat-box-container -->
+        </div>
+        <!-- end main content-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
