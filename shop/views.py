@@ -4,12 +4,13 @@ from .forms import ReviewForm, RatingForm
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
 from cart.forms import CartAddProductForm
-
+from account.models import Profile
 
 def product_list(request, category_slug=None):
     products = Product.objects.filter(draft=False)
     category = None
     categories = Category.objects.all()
+    profile = Profile.objects.all()
     cart_product_form = CartAddProductForm()
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -18,6 +19,7 @@ def product_list(request, category_slug=None):
                                                          'categories':categories,
                                                          'category':category,
                                                          'cart_product_form': cart_product_form,
+                                                         'profile': profile,
                                                          })
 
 
