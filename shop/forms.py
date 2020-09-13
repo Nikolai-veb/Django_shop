@@ -1,6 +1,18 @@
 from django import forms
 
-from .models import Review, Rating, RatingStar
+from .models import Review, Rating, RatingStar, Product
+
+
+class FlterProductsForm(forms.ModelForm):
+    """Форма фильтров"""
+    class Meta:
+        model = Product
+        fields = ("price", "category")
+        widgets = {
+            "price": forms.TextInput(attrs={"class":"price-slider"}),
+            "category": forms.TextInput(attrs={"":""})
+        }
+
 
 
 class ReviewForm(forms.ModelForm):

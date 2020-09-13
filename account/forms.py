@@ -9,6 +9,12 @@ class UserRegisterForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')
+        widgets = {
+            "username": forms.TextInput(attrs={"class":"", "id": ""}),
+            "first_name": forms.TextInput(attrs={"class":"", "id": ""}),
+            "last_name": forms.TextInput(attrs={"class":"", "id": ""}),
+            "email": forms.EmailInput(attrs={"class": ""}),
+        }
 
     def clean_password2(self):
         cd = self.cleaned_data

@@ -1,12 +1,16 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product, Review, Rating, ProductImages
-from .forms import ReviewForm, RatingForm
+from .forms import ReviewForm, RatingForm, FlterProductsForm
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
 from cart.forms import CartAddProductForm
 from account.models import Profile
+from django.db.models import Max, Min
+
 
 def product_list(request, category_slug=None):
+    max_price  = Product.objects.all().aggregate(Max('price'))
+    min_price  = Product.objects.all().aggregate(Min('price'))
     products = Product.objects.filter(draft=False)
     category = None
     categories = Category.objects.all()
@@ -20,7 +24,15 @@ def product_list(request, category_slug=None):
                                                          'category':category,
                                                          'cart_product_form': cart_product_form,
                                                          'profile': profile,
+                                                         'max_price': max_price,
+                                                         'min_price': min_price,
+
                                                          })
+
+def filter_products(request):
+    """Фильтр продуктов"""
+    filters = Product.objects.filter(price__in=request.GET.get_list("price"))
+    return filters
 
 
 def product_detail(request, id, slug):

@@ -21,13 +21,13 @@
         </div>
         <div class="nav nav-tabs nav-justified nav-filter white">
             <ul class="owl-carousel owl-theme js-owl-category">
-                <li class="active"><a data-toggle="pill" href="#all">All</a></li>
-                <li><a data-toggle="pill" href="#women">Women</a></li>
-                <li><a data-toggle="pill" href="#access">Accesories</a></li>
-                <li><a data-toggle="pill" href="#gagets">Gagets</a></li>
-                <li><a data-toggle="pill" href="#edit">Editorials</a></li>
-                <li><a data-toggle="pill" href="#edit">Editorials</a></li>
-                <li><a data-toggle="pill" href="#edit">Editorials</a></li>
+
+                <li class="active"><a data-toggle="pill" href="/">All</a></li>
+                 {% for c in categories %}
+                     <li {% if category.slug == c.slug %} {% endif %} >
+                         <a data-toggle="pill" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
+                     </li>
+                  {% endfor %}
             </ul>
         </div>
     </div>
@@ -43,8 +43,10 @@
         <div class="wrap-filter-box text-center view-mode">
             <a class="col" href="#" onClick="return false;"><span class="icon-grid-img"></span></a>
         </div>
+
+
         <div class="wrap-filter-box text-center js-filter"><a href="#" class="filter-title"><i class="icon-equalizer"></i></a>
-            <form action="#" method="get" class="form-filter-product js-filter-open">
+            <form action="" method="get" class="form-filter-product js-filter-open">
                 <span class="close-left js-close"><i class="icon-close f-20"></i></span>
                 <div class="product-filter-wrapper">
                     <div class="product-filter-inner text-left">
@@ -69,10 +71,6 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li>Choose color</li>
-                                    <li>Red</li>
-                                    <li>Blue</li>
-                                    <li>Gray</li>
-                                    <li>White</li>
                                 </ul>
                             </div>
                         </div>
@@ -90,16 +88,19 @@
                                 </ul>
                             </div>
                         </div>
+
                         <div class="product-filter">
                             <div class="form-group">
                                 <span class="title-filter">Price</span>
                                 <div class="filter-content">
+                                
                                     <div class="price-range-holder">
-                                        <input type="text" class="price-slider" value="">
+                                        <input type="text" class="price-slider" name="price" value="{{ products.price }}">
                                     </div>
                                     <span class="min-max">
-                                    Price: $30 — $3450
-                                </span>
+                                        Price: ${{ min_price.price__min }} — ${{ max_price.price__max }}
+                                    </span>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -107,7 +108,7 @@
                     </div>
                     <div class="product-filter-button-group clearfix">
                         <div class="product-filter-button">
-                            <a href="" class="btn-submit">Fillter </a>
+                            <button class="btn-submit"type="sumbit" >Fillter </button>
                         </div>
                         <div class="product-filter-button">
                             <a href="" class="btn-submit">Clear </a>
