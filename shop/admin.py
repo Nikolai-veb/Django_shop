@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.safestring import mark_safe
 from .models import Category, Product, Rating, RatingStar, Review, ProductImages
 from PIL import Image
-from modeltranslation.admin import TranslationAdmin
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -31,6 +31,7 @@ class ProductAdmin(admin.ModelAdmin):
         "category",
         "slug",
         "draft",
+
     )
 
     list_filter = ("name", "price", "category")

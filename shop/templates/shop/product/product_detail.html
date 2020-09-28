@@ -2,36 +2,36 @@
 {% load static %}
 {% block content %}
 
-{% block title %} {{ product.name  }} {% endblock %}</title>
+{% block title %} {{ product.name  }} {% endblock %}
 
 
-<div class="modal fade" id="my360" role="dialog">
-        <div class="modal-dialog">
-            <div class="product-360-view-wrapper modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">x</button>
-                </div>
-                <div class="threesixty js-product-360">
-                    <div class="spinner">
-                        <span>0%</span>
-                    </div>
-                    <ol class="threesixty_images"></ol>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--<div class="modal fade" id="my360" role="dialog">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="product-360-view-wrapper modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <button type="button" class="close" data-dismiss="modal">x</button>-->
+<!--                </div>-->
+<!--                <div class="threesixty js-product-360">-->
+<!--                    <div class="spinner">-->
+<!--                        <span>0%</span>-->
+<!--                    </div>-->
+<!--                    <ol class="threesixty_images"></ol>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
 
 
         <!-- Template -->
 
-        <div class="cmage in product.product_images.all %} ntainer container-42">
+       <!-- <div class="cmage in product.product_images.all %} ntainer container-42">
             <ul class="breadcrumb">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Man</a></li>
                 <li class="active"><a href="#">Hooded Coat</a></li>
             </ul>
-        </div>
+        </div>-->
         <div class="container">
             <div class="single-product-detail product-bundle single-product-space v3">
                 <div class="row">
@@ -39,12 +39,12 @@
                         <div class="product-images">
                             <div class="main-img js-product-slider">
                                 <a href="#" class="hover-images effect"><img src="{% if product.poster %}{{ product.poster.url  }}{% else %}{% static "img/bottle.jpg" %}{% endif %}" alt="photo" class="img-reponsive"></a>
-                                </div>
-                            <div class="cosre-btn">
-                                <div class="btn-360" data-toggle="modal" data-target="#my360">
-                                    <a href="#">360 DEGREE view</a>
-                                </div>
-                            </div>
+<!--                                </div>-->
+<!--                            <div class="cosre-btn">-->
+<!--                                <div class="btn-360" data-toggle="modal" data-target="#my360">-->
+<!--                                    <a href="#">360 DEGREE view</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                 
                         <div class="multiple-img-list-ver2 js-click-product">
@@ -53,7 +53,6 @@
                                 <div class="img">
                                     <p>
                                     <img src="{% if image.images %}{{ image.images.url }}{% else %}{% static "img/bottle.jpg" %}{% endif %}" alt="images" class="img-responsive" width="150" height="200">
-
                                     </p>
                                 </div>
                             </div>
@@ -73,7 +72,20 @@
                                 </div>
                                 <span class="review">({{ product.reviews.count  }}  customer review)</span>
                             </div>
-                            <h3 class="product-title"><a href="#">360 Degree View</a></h3>
+                            <h3 class="product-title"><a href="#">{{ product.name }}</a></h3>
+
+                             <div>
+                                 <a href="{% url "favorite_add" product.id %}" class="link-ver1 wish">
+                                    <i class="icon-heart f-15"></i>
+                                 </a>
+                             </div>
+<!--                            <form action="{% url "favorite_add" product.id %}" method="post">-->
+
+<!--                                    {% csrf_token %}-->
+<!--                                <button><input type="submit" value="Избранное"></button>-->
+<!--                            </form>-->
+
+
                             <div class="product-price">
                                 <span>${{ product.price }}</span>
                             </div>
@@ -81,15 +93,14 @@
                             
                             <div class="action v6">
                                 
-                                <div class="cart">                      
+                                <div class="cart">
                                     <form action="{% url "cart_add" product.id %}" method="post">
-                                        {{ cart_product_form }} 
-                                        <div>
-                                            <a href="#" class="link-ver1 wish"><i class="icon-heart f-15"></i></a>
-                                        </div>
+                                        {{ cart_product_form }}
+
+                                    <div><div></div></div>
                                         {% csrf_token %}                                                                                                                      <input type="submit" class="link-ver1 add-cart" value="Add to cart">      
-                                </form>                                         
-                            </div>
+                                    </form>
+                                </div>
                                                                                   
                                 <div class="clearfix"></div>
                             </div>
@@ -158,7 +169,7 @@
                                 {{ form.email }}
                             </div>
                         </div>
-                        <button type="submit" class="mt-3 btn btn-success btn-block py-3">
+                        <button type="submit" class=" btn btn-success ">
                             Отправить
                         </button>
                     </form>

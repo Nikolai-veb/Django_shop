@@ -20,9 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dca8e63a-e61b-487b-86f5-1af40ad9d613" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Django_shop.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Django_shop.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Django_shop/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django_shop/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Django_shop/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django_shop/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/templates/account/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/account/templates/account/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/cart.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/cart.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/templates/cart/cart_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/cart/templates/cart/cart_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cart/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cart/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/include/header.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/templates/shop/product/product_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/product/product_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop/templates/shop/product/product_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/product/product_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,13 +49,44 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitToolBoxStore">
+    <option name="projectConfigVersion" value="2" />
+    <option name="recentBranches">
+      <RecentBranches>
+        <option name="branchesForRepo">
+          <list>
+            <RecentBranchesForRepo>
+              <option name="branches">
+                <list>
+                  <RecentBranch>
+                    <option name="branchName" value="dev" />
+                    <option name="lastUsedInstant" value="1600298960" />
+                  </RecentBranch>
+                  <RecentBranch>
+                    <option name="branchName" value="master" />
+                    <option name="lastUsedInstant" value="1600298959" />
+                  </RecentBranch>
+                </list>
+              </option>
+              <option name="repositoryRootUrl" value="file://$PROJECT_DIR$" />
+            </RecentBranchesForRepo>
+          </list>
+        </option>
+      </RecentBranches>
+    </option>
   </component>
   <component name="GithubPullRequestsUISettings">
     <option name="hiddenUrls">
@@ -58,9 +106,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Django_movie/Django_movie/django_movie/movie/forms.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -73,6 +122,9 @@
       <updated>1595859373413</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.css" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -111,13 +163,22 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="163" key="GridCell.Tab.0.right/0.27.1366.741/1366.0.1024.768@0.27.1366.741" timestamp="1595875444669" />
-    <state x="55" y="31" width="1304" height="737" key="SettingsEditor" timestamp="1596748402768">
-      <screen x="0" y="27" width="1366" height="741" />
+    <state x="95" y="146" width="824" height="507" key="IDE.errors.dialog" timestamp="1601310562499">
+      <screen x="0" y="32" width="1024" height="736" />
+    </state>
+    <state x="95" y="146" width="824" height="507" key="IDE.errors.dialog/0.32.1024.736@0.32.1024.736" timestamp="1601310562499" />
+    <state x="2" y="35" width="1304" height="737" key="SettingsEditor" timestamp="1600376956921">
+      <screen x="0" y="32" width="1024" height="736" />
     </state>
     <state x="55" y="31" width="1304" height="737" key="SettingsEditor/0.27.1366.741/1366.0.1024.768@0.27.1366.741" timestamp="1596748402768" />
+    <state x="2" y="35" key="SettingsEditor/0.32.1024.736@0.32.1024.736" timestamp="1600376956921" />
     <state x="526" y="306" width="303" height="189" key="VCS.ChangelistChooser" timestamp="1595962124461">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="526" y="306" width="303" height="189" key="VCS.ChangelistChooser/0.27.1366.741/1366.0.1024.768@0.27.1366.741" timestamp="1595962124461" />
+    <state x="175" y="88" width="672" height="678" key="search.everywhere.popup" timestamp="1600370876996">
+      <screen x="0" y="32" width="1024" height="736" />
+    </state>
+    <state x="175" y="88" width="672" height="678" key="search.everywhere.popup/0.32.1024.736@0.32.1024.736" timestamp="1600370876996" />
   </component>
 </project>

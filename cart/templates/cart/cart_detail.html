@@ -11,10 +11,10 @@
       <div class="container">
         <div class="row">
           <div class="col-md-8">
-            <h3>Shopping Cart</h3>
+            <h3>Корзина покупателя</h3>
              <table class="table cart-table space-30">
                  <tbody>
-                  {% for item in cart %}
+                  {% for item in cart.inter %}
                   {% with  product=item.product %}
 
                   <tr class="item_cart">
@@ -26,14 +26,14 @@
 
                                 
                                                   {{ item.update_quantity_form.update  }}
-                                                  <input type="submit" value="Update">
+                                                  <input type="submit" value="Обновить">
                                          {% csrf_token %}
                                            </form>
                                             </div>
                                         </td>
                                         <td class="total-price">
                                             <a class="remove" href="{% url "cart_remove" product.id%}" title="">
-                                                x
+                                                <button>Удалить</button>
                                             </a>
                                             <p class="price">{{ product.price }}</p>
                                             <p class="price">{{ item.total_price   }}</p>
@@ -46,46 +46,46 @@
                             </table>
                             <div class="row">
                                 <div class="col-xs-12 col-sm-6">
-                                    <a href="{% url "product_list" %}" class="btn link-button hover-black continue">Continue Shopping</a>
+                                    <a href="{% url "product_list" %}" class="btn link-button hover-black continue">Продолжить покупки</a>
                                 </div>
                             </div>
                         </div>
                         <!-- End contact-form -->
                         <div class="col-md-4">
-                            <h3>Coupon</h3>
+                            <h3>Купон</h3>
                             <div class="contact-form coupon">
                                 <form class="">
                                     <div class="form-group">
                                         <input type="text" class="form-control input-cart" id="inputfname" placeholder="Coupon Code">
-                                        <button value="Submit" class="btn link-button link-button-v2 hover-white color-red" type="submit">Apply coupon</button>
+                                        <button value="Submit" class="btn link-button link-button-v2 hover-white color-red" type="submit">Применить купон</button>
                                     </div>
                                 </form>
                             </div>
-                            <h3>Cart Totals</h3>
+                            <h3>Итоги корзины</h3>
                             <div class="text-price">
                                 <ul>
-                                    <li><span class="text">Subtotal</span><span class="number">{{ cart.get_total_price   }}</span></li>
-                                    <li><span class="text">Shipping</span>
+                                    <li><span class="text">Промежуточный итог</span><span class="number">{{ cart.get_total_price   }}</span></li>
+                                    <li><span class="text">Перевозка</span>
                                         <div class="payment">
                                             <form action="#">
                                                 <input type="radio" name="gender" value="Flat" id="radio1" checked="checked">
-                                                <label for="radio1">Free Shipping</label>
+                                                <label for="radio1">Бесплатная доставка</label>
                                                 <input type="radio" name="gender" value="Free" id="radio2">
-                                                <label for="radio2">Standard <span class="number">$20.00</span></label>
+                                                <label for="radio2">Стандарт<span class="number">$20.00</span></label>
                                                 <input type="radio" name="gender" value="Delivery" id="radio3">
-                                                <label for="radio3">Local Pickup</label>
+                                                <label for="radio3">Местный пикап</label>
                                             </form>
                                         </div>
                                     </li>
-                                    <li><span class="text calculate">Calculate shipping</span>
+                                    <li><span class="text calculate">Рассчитать стоимость доставки</span>
                                         <form class="zipcode" action="#">
                                             <input type="text" class="form-control input-cart" placeholder="Zipcode">
                                         </form>
                                     </li>
-                                    <li><span class="text">Totals</span><span class="number">$89.00</span></li>
+                                    <li><span class="text">Итоги</span><span class="number">$89.00</span></li>
                                 </ul>
                             </div>
-                            <a class="btn link-button hover-white checkout" href="{% url "order_create" %}" title="Proceed to checkout">Proceed to checkout</a>
+                            <a class="btn link-button hover-white checkout" href="{% url "order_create" %}" title="Proceed to checkout">Перейти к оформлению заказа</a>
                         </div>
                     </div>
                 </div>

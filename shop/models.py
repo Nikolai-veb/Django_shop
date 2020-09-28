@@ -1,7 +1,14 @@
+from django.conf import settings
+from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 import datetime
 from PIL import Image
+from django.utils.text import slugify
+
+
+
+
 class Category(models.Model):
     """Категории"""
     name = models.CharField(max_length=50)
@@ -20,6 +27,7 @@ class Category(models.Model):
 
 class Product(models.Model):
     """Товар"""
+
     category = models.ForeignKey(Category, verbose_name="Катеория", on_delete=models.CASCADE, related_name="products")
     name = models.CharField("Название товара", max_length=150)
     poster = models.ImageField("Изображение", upload_to="posters/", blank=True, null=True)
@@ -31,10 +39,12 @@ class Product(models.Model):
     create = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 
+
     class Meta:
         verbose_name = "Товар"
         verbose_name_plural = "Товары"
         ordering = ["-create"]
+
 
     def get_absolute_url(self):
         return reverse("product_detail", kwargs={"slug":self.slug, "id":self.id})
@@ -81,6 +91,7 @@ class Rating(models.Model):
         verbose_name = "Рейтинг"
         verbose_name_plural = "Рейтинг"
 
+
     def __str__(self):
         return f'{self.star}-{self.product}'
 
@@ -102,3 +113,27 @@ class Review(models.Model):
 
     def __str__(self):
         return f'{self.name}-{self.product}'
+
+
+# class AbstractFavorit(models.Model):
+#         class Meta:
+#             abstract = True
+#
+#         user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
+#
+#         def __str__(self):
+#             return self.user.username
+#
+# class BookmarkProduct(AbstractFavorit):
+#         class Meta:
+#             db_table = "bookmark_product"
+#
+#         obj = models.ForeignKey(Product, verbose_name="Продукт", on_delete=models.CASCADE)
+#
+# class BookmarkReview(AbstractFavorit):
+#         class Meta:
+#             db_table = "bookmark_review"
+#
+#         obj = models.ForeignKey(Review, verbose_name="Комментарий", on_delete=models.CASCADE)
+
+
