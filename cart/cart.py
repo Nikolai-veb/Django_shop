@@ -36,18 +36,23 @@ class Cart(object):
             del self.cart[product_id]
             self.save()
 
-    def __iter__(self):
+    def inter(self):
         """Проходим по товарам корзины и получаем соответствующие объекты Product."""
-        product_ids = self.cart.keys()
+        product_ids = [i for i in self.cart.keys()]
+
         # Получаем объекты модели Product и передаем их в корзину
         products = Product.objects.filter(id__in=product_ids)
+        print(products)
         cart = self.cart.copy()
+        carts = []
         for product in products:
             cart[str(product.id)]['product'] = product
         for item in cart.values():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
-        yield item
+            carts.append(item)
+        return carts
+
 
     def __len__(self):
         """Возвращает общее количество товаров в корзине."""

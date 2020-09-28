@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'cart.apps.CartConfig',
     'orders.apps.OrdersConfig',
     'account.apps.AccountConfig',
+    'favorites.apps.FavoritesConfig',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'cart.context_processors.cart',
+                'favorites.context_processors.favorite',
             ],
         },
     },
@@ -138,7 +140,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 #Carzina data storage key in session
 CART_SESSION_ID = 'cart'
-
+FAVORITE_SESSION_ID = 'favorite'
 
 LOGIN_REDIRECT_URL = '/'
 

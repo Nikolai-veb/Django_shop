@@ -2,6 +2,95 @@
 
 {% block content %}
 
+        <div class="main-content space-padding-tb-70">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12">
+                        <div class="customer-page">
+                            <div class="title-page">
+                                <h3>Login</h3>
+                            </div>
+
+                            <form action="{% url "login" %}" method="post" class="form-customer form-login">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Username or email address *</label>
+                                    {{ form.username }}
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password *</label>
+                                    <input type="password" class="form-control form-account" id="exampleInputPassword1">
+                                </div>
+                                <div class="form-check">
+                                    <button type="submit" class="btn-login hover-white">Login</button>
+                                    <label class="form-check-label">
+                                        <input type="checkbox" class="form-check-input">
+                                        <span>Remember me</span>
+                                    </label>
+                                    <a href="" class="lost-password">Lost your password?</a>
+                                </div>
+                            </form>
+
+
+
+                            <span class="divider"></span>
+                            <a href="" class="btn link-button create-account hover-black">Create an account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end main content-->
+        <footer>
+            <div class="container container-42">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="menu-footer">
+                            <ul>
+                                <li><a href="#">Shipping</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="newletter-form">
+                            <h3 class="footer-title text-center">Newsletter</h3>
+                            <form action="#">
+                                <input type="text" name="s" placeholder="Email Adress..." class="form-control">
+                                <button type="submit" class="btn btn-submit">
+                                    <i class="fa fa-angle-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                        <div class="social">
+                            <a href="#" title="twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                            <a href="#" title="facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                            <a href="#" title="google plus">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                            <a href="#" title="Pinterest">
+                            <i class="fa fa-pinterest-p"></i>
+                        </a>
+                            <a href="#" title="rss">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <a href="#" class="scroll_top">SCROLL TO TOP<span></span></a>
+    
+
+
     {% if form.errors %}
       <p>Your username and password didn't match. Please try again.</p>
   {% endif %}

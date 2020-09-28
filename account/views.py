@@ -37,7 +37,7 @@ def edit(request):
 
 @login_required
 def profile(request, id):
-    """"""
+    """Обработчик профиля"""
     profiles = get_object_or_404(Profile, id=id)
     return render(request, 'account/profile.html', {'profiles': profiles})
 

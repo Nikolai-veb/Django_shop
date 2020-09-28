@@ -211,7 +211,7 @@ textarea {
   margin: 0; }
 
 button {
-  overflow: visible; }
+  .: visible; }
 
 button,
 select {
@@ -6568,6 +6568,7 @@ input, textarea, button {
 
 button {
   border: none;
+  background: black;
   -webkit-box-shadow: none;
           box-shadow: none; }
 
@@ -11514,7 +11515,7 @@ table.table.cart-table th {
   padding-bottom: 5px;
   padding-top: 35px; }
 table.table.cart-table td {
-  padding: 25px 0px; }
+  padding: 30 0px; }
   table.table.cart-table td:first-child {
     width: 110px; }
   table.table.cart-table td:nth-child(2) a {
@@ -14578,7 +14579,7 @@ footer.footer-absolute .newletter-form .btn-submit i {
 
 .btn {
     border-right: 50%;
-    width: 32px;
+
     height: 32px;
     line-height: 18px;
 }
