@@ -10,7 +10,7 @@
                 
                 </div>
                 <div class="avatar">
-                    <img src="{{ profiles.photo.url  }}" alt="">
+                    <img src="{% if profile.photo %}{{ profiles.photo.url  }}{% else %}{% static "img/profile.webp" %}{% endif %}" alt="">
                 </div>
                 <div class="info">
                     <div class="title">

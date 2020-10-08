@@ -43,7 +43,7 @@
     <header id="header" class="header-v1">
         <div class="sticky-header text-center hidden-xs hidden-sm">
             <div class="text">
-                <span class="u-line">Free shipping and returns</span>
+                <span class="u-line"></span>
             </div>
         </div>
 
@@ -58,17 +58,25 @@
                                 <a href="{% url "login" %}"><i class="icon-user f-15"></i></a>
                              {% endif %}
                         </div>
-                        <div class="topbar-wishlist">
-                            <a href="#">
+                       <div class="topbar-wishlist">
+                           {% with total_items=favorite|length %}
+                                  {% if favorite|length > 0 %}
+                            <a href="{% url "favorite_detail" %}">
+                                <i class="icon-heart f-15"></i>
+                                <span class="count wishlist-count">{{ total_items  }}</span>
+                            {% else %}
                                 <i class="icon-heart f-15"></i>
                                 <span class="count wishlist-count">0</span>
+                                 {% endif %}
+                                  {% endwith %}
+
                             </a>
                         </div>
                         <div class="topbar-language dropdown">
                             <a id="label1" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                              <span>EN</span>
-                              <span class="fa fa-caret-down f-10"></span>
+                              <span></span>
+                              <!-- <span class="fa fa-caret-down f-10"></span>-->
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="label1">
                                 <li><a href="#">English</a></li>
@@ -88,8 +96,8 @@
                         <div class="topbar-currency dropdown">
                             <a id="label2" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 
-                              <span>USD</span>
-                              <span class="fa fa-caret-down f-10"></span>
+                             <!-- <span>USD</span>
+                              <span class="fa fa-caret-down f-10"></span> -->
                             </a>
                             <ul class="dropdown-menu" aria-labelledby="label2">
                                 <li><a href="#">USD</a></li>
@@ -147,11 +155,11 @@
                                                 {% endfor %}
                                         </ul>
                                     </li>
-                                    <li class="level1 dropdown hassub"><a href="/">Магазин</a>
+                                   <!-- <li class="level1 dropdown hassub"><a href="/">Магазин</a>
                                         <span class="plus js-plus-icon"></span>
                                         <div class="menu-level-1 dropdown-menu">
                                             <ul class="level1">
-                                                <li class="level2 col-6">
+                                               <li class="level2 col-6">
                                                     <a href="#">Страницы магазина</a>
                                                     <ul class="menu-level-2 col-6">
                                                         <li class="level3"><a href="cart_page_emty.html" title="Cart Empty">Тележка Пустая</a></li>
@@ -175,7 +183,7 @@
                                                 </li>
                                             </ul>
                                             <div class="clearfix"></div>
-                                        </div>
+                                        </div> -->
 
 
                                     </li>
@@ -195,7 +203,7 @@
                                     </li>
 
 
-                                    <li class="level1 dropdown hassub">
+                                  <!--  <li class="level1 dropdown hassub">
                                         <a href="#">Features</a>
                                         <span class="plus js-plus-icon"></span>
                                         <div class="menu-level-1 dropdown-menu">
@@ -235,7 +243,7 @@
                                             <li class="level2"><a href="#" title="Hover Product 4">Hover Product 4</a></li>
                                             <li class="level2"><a href="#" title="Hover Product ">Hover Product </a></li>
                                         </ul>
-                                    </li>
+                                    </li> -->
                                     <li class="level1 active dropdown">
                                         <a href="#">Blog</a>
                                         <span class="plus js-plus-icon"></span>

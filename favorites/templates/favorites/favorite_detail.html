@@ -1,0 +1,44 @@
+{% extends "shop/base.html" %}
+
+
+{% load static %}
+
+{% block title %}Your is Favoruites{% endblock %}
+{% block content %}
+
+
+<!--main content-->
+  <div class="main-content">
+    <div class="cart-box-container-ver2">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h3>Избранные</h3>
+             <table class="table cart-table space-30">
+                 <tbody>
+                  {% for item in favorite.inter %}
+                  {% with  product=item.product %}
+
+                  <tr class="item_cart">
+                      <td class="product-photo"><a href="{{ product.get_absolute_url }}"><img src="{% if product.poster %} {{ product.poster.url }}{% else %}{% static "img/bottle.jpg" %}{% endif %}" alt="Futurelife"></a></td>
+                      <td class="produc-name"><a href="{{ product.get_absolute_url  }}" title="">{{ product.name }}</a>
+
+                      </td>
+                        <td class="total-price">
+                            <a class="remove" href="{% url "favorite_remove" product.id %}" title="">
+                                <button>Удалить</button>
+                            </a>
+                                <p class="price">{{ product.price }}</p>
+                                <p class="price">{{ item.total_price   }}</p>
+                        </td>
+                  </tr>
+                  {% endwith %}
+                  {% endfor %}
+                 </tbody>
+             </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

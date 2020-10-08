@@ -27,11 +27,11 @@ def cart_detail(request):
     """Oбработчик для страницы списка товаров, добавленных в корзину"""
     cart = Cart(request)
     products = cart.list_items()
-    for item in cart:
+    for item in cart.inter():
         item['update_quantity_form'] = CartAddProductForm(
-             initial={'quantity': item['quantity'],
-                       'update': True}
+            initial={'quantity': item['quantity'],
+                    'update': True}
         )
-        return render(request, 'cart/cart_detail.html', {'cart': cart, 'products': products})
+    return render(request, 'cart/cart_detail.html', {'cart': cart, 'products': products})
 
 

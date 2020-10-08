@@ -13,8 +13,8 @@
                 <div class="container container-42">
                     <h1 class="page-title white">Shop</h1>
                     <ul class="breadcrumb white">
-                        <li><a href="">home</a></li>
-                        <li><a href="">Shop All Products</a></li>
+                       <!-- <li><a href="">home</a></li>
+                        <li><a href="">Shop All Products</a></li> -->
                     </ul>
                 </div>
             </div>
@@ -52,19 +52,19 @@
                     <div class="product-filter-inner text-left">
                         <div class="product-filter">
                             <div class="form-group">
-                                <span class="title-filter">Category</span>
-                                <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Select a category
+                                <span class="title-filter">Категории</span>
+                                <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Выберите категорию
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li>Select a category</li>
-                                    <li>Backpacks</li>
-                                    <li>Decoration</li>
-                                    <li>Essentials</li>
-                                    <li>Interior</li>
+                                     {% for c in get_category %}
+                                    <li  >
+                                        {{ c.name }}
+                                    </li>
+                                    {% endfor %}
                                 </ul>
                             </div>
                         </div>
-                        <div class="product-filter">
+                        <!--<div class="product-filter">
                             <div class="form-group">
                                 <span class="title-filter">Color</span>
                                 <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Choose color
@@ -87,7 +87,7 @@
                                     <li>XL</li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
 
                         <div class="product-filter">
                             <div class="form-group">
@@ -95,7 +95,9 @@
                                 <div class="filter-content">
                                 
                                     <div class="price-range-holder">
-                                        <input type="text" class="price-slider" name="price" value="{{ products.price }}">
+                                        <!--<input type="text" class="price-slider" name="price" value="{{ products.price }}">-->
+                                      <input type="range" name="price" id="price" value="" min="{{ min_price.price__min }}" max="{{ max_price.price__max }}">
+
                                     </div>
                                     <span class="min-max">
                                         Price: ${{ min_price.price__min }} — ${{ max_price.price__max }}
@@ -108,7 +110,7 @@
                     </div>
                     <div class="product-filter-button-group clearfix">
                         <div class="product-filter-button">
-                            <button class="btn-submit"type="sumbit" >Fillter </button>
+                            <button class="btn-submit" type="sumbit" >Fillter </button>
                         </div>
                         <div class="product-filter-button">
                             <a href="" class="btn-submit">Clear </a>
@@ -121,8 +123,7 @@
             <a class="list" href="#" onClick="return false;"><span class="icon-list-img"></span></a>
         </div>
         <div class="wrap-filter-box wrap-filter-sorting">
-            <button class="dropdown-toggle" type="button" data-toggle="dropdown" id="menu2">Sort by newness
-            </button>
+            <button class="dropdown-toggle" type="button" data-toggle="dropdown" id="menu2"> Сортировка </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
                 <li><a href="#" title="">Sort by newness</a></li>
                 <li><a href="#" title="">Best Selling</a></li>
@@ -143,7 +144,9 @@
                         <div class="col-md-15 col-sm-3 col-xs-6 product-item">
                             <div class="product-images">
                                 <a href="{{ product.get_absolute_url }}" class="hover-images effect"><img src="{% if product.poster %}{{ product.poster.url }}{% else %}{% static "img/products/shortshirt.jpg" %}{% endif %}" alt="photo" class="img-reponsive" width="516" height="350"></a>
-                                <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+
+                                <a href="{% url "favorite_add" product.id %}" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
+
                                 <a href="{{ product.get_absolute_url }}" class="btn-quickview">QUICK VIEW</a>
                             </div>
                             <div class="product-info-ver2">
@@ -151,11 +154,11 @@
                                 <div class="product-after-switch">
                                     <div class="product-price">${{ product.price }}</div>
                                     <div class="product-after-button">
-                                        <form action="{% url "cart_add" product.id %}" method="post">
+                                       <!-- <form action="{% url "cart_add" product.id %}" method="post">
                                             {% csrf_token %}
                                             {{ cart_product_form  }}
                                              <input type="submit" value="ADD TO CART" class="addcar">
-                                        </form>
+                                        </form>-->
                                     </div>
                                 </div>
                                 <div class="rating-star">
@@ -166,9 +169,7 @@
                                     <span class="star star-1"></span>
                                 </div>
                                 <p class="product-desc">Compellingly brand enterprise value after functional manufactured products. Synergistically morph process-centric intellectual capital rather than extensible catalysts for change. Credibly aggregate progressive initiatives and long-term.</p>
-                                <div class="product-pRU
-9+
-rice">${{ product.price }}</div>
+                               <div class="product-price">${{ product.price }}</div>
                                 <div class="button-group">
                                   <div>
                                     <form action="{% url "cart_add" product.id %}" method="post">
@@ -185,26 +186,19 @@ rice">${{ product.price }}</div>
                             </div>
                         </div>
 
-                   <!-- Paginaion
-                    <div class="pagination-container pagination-blog button-v text-center">
-                        <nav>
-                            <ul class="pagination">
-                                <li><a class="active" href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div> -->
+
                         {% endfor %}
-                  </div> 
+                  </div>
+
+                   <div class="pagination-container pagination-blog button-v text-center">
+                        {% include "include/pagination.html" %}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+
+
 
 {% endblock %}
