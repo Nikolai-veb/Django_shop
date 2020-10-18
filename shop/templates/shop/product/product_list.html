@@ -123,13 +123,19 @@
             <a class="list" href="#" onClick="return false;"><span class="icon-list-img"></span></a>
         </div>
         <div class="wrap-filter-box wrap-filter-sorting">
+            <form action="{% url "sorte" %}" method="post">
             <button class="dropdown-toggle" type="button" data-toggle="dropdown" id="menu2"> Сортировка </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="menu2">
-                <li><a href="#" title="">Sort by newness</a></li>
+                <li><a href="#" title="">{{ sorting.create }} Дате выхода</a></li>
+                <li><a href="#" title="">{{sorting.price }} По цене</a></a></li>
                 <li><a href="#" title="">Best Selling</a></li>
-                <li><a href="#" title="">Best Selling</a></li>
+                <li>
+                    <a href="#"><button type="sumbit">Sorting</button></a>
+                </li>
             </ul>
         </div>
+        {% csrf_token %}
+        </form>
         <div class="clearfix"></div>
     </div>
 

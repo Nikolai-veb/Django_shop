@@ -150,7 +150,7 @@
                                                 </li>
                                                 {% for c in categories %}
                                                 <li {% if category.slug == c.slug %} class="level2" {% endif %}>
-                                                    <a href="{{ c.get_absolute_url   }}" title="Home Clean">{{ c.name }}</a>
+                                                    <a href="{{ c.get_absolute_url }}" title="Home Clean">{{ c.name }}</a>
                                                 </li>
                                                 {% endfor %}
                                         </ul>
