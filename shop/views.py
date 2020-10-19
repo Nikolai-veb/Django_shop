@@ -5,7 +5,7 @@ from .models import Category, Product, Review, Rating, ProductImages
 from .forms import ReviewForm, RatingForm, SorteProductForm
 from cart.forms import CartAddProductForm
 from account.models import Profile
-from django.db.models import Max, Min
+from django.db.models import Max, Min, Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.http import require_GET, require_POST
 from django.views.generic.base import View
@@ -23,7 +23,23 @@ def sorte_product(request):
         return render(request, "shop/product/product_list.html", {"products":products})
 
 
-class ProductListView(ListView):
+class PriceCategory:
+
+    def get_category(self):
+        return Category.objects.all()
+
+    def get_price(self):
+        return Product.objects.filter(draft=False).values('price')
+    
+    def min_price(self):
+        return Product.objects.all().aggregate(Min('price'))
+    
+    def max_price(self):
+        return Product.objects.all().aggregate(Max('price'))
+
+
+
+class ProductListView(PriceCategory, ListView):
     """Класс обработки продуктов"""
     model = Product
     template_name = "shop/product/product_list.html"
@@ -43,18 +59,11 @@ class ProductListView(ListView):
         context['categories'] = Category.objects.all()
         context['cart_product_form'] = CartAddProductForm()
         context['profile'] = Profile.objects.all()
-        context['min_price'] = Product.objects.all().aggregate(Min('price'))
-        context['max_price'] = Product.objects.all().aggregate(Max('price'))
         return context
 
 
-def filter_products(request):
-    """Фильтр продуктов"""
-    filters = Product.objects.filter(price__in=request.GET.get_list("price"))
-    return
 
-
-class ProductDetailView(DetailView):
+class ProductDetailView(PriceCategory, DetailView):
     """Класс обрботки продукта"""
     model = Product
     id_field = "pk"
@@ -65,6 +74,27 @@ class ProductDetailView(DetailView):
         context["star_form"] = RatingForm()
         context["cart_product_form"] = CartAddProductForm()
         context["form"] = ReviewForm()
+        return context
+
+
+
+class FilterProduct(PriceCategory, ListView):
+    """Фильтр продустов"""
+    template_name = "shop/product/product_list.html"
+    context_object_name = "products"
+
+    def get_queryset(self):
+        price_range = [i for i in range(int(self.request.GET['min_price']), int(self.request.GET['max_price']))]
+        queryset = Product.objects.filter( Q(category__in=self.request.GET.getlist("category")) | 
+                                           Q(price__in=price_range)
+                                          )
+        print(price_range)
+        print(queryset)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cateory'] = ''.join([f"category={x}&" for x in self.request.GET.getlist("category")])
         return context
 
 

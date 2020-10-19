@@ -148,7 +148,7 @@
                                                 <li {% if not category %} class="level2" {% endif %}>
                                                     <a href="{% url "product_list" %}" title="Home">Главная</a>
                                                 </li>
-                                                {% for c in categories %}
+                                                {% for c in view.get_category %}
                                                 <li {% if category.slug == c.slug %} class="level2" {% endif %}>
                                                     <a href="{{ c.get_absolute_url }}" title="Home Clean">{{ c.name }}</a>
                                                 </li>

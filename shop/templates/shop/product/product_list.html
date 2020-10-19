@@ -23,7 +23,7 @@
             <ul class="owl-carousel owl-theme js-owl-category">
 
                 <li class="active"><a data-toggle="pill" href="/">All</a></li>
-                 {% for c in categories %}
+                 {% for c in view.get_category %}
                      <li {% if category.slug == c.slug %} {% endif %} >
                          <a data-toggle="pill" href="{{ c.get_absolute_url }}">{{ c.name }}</a>
                      </li>
@@ -46,7 +46,8 @@
 
 
         <div class="wrap-filter-box text-center js-filter"><a href="#" class="filter-title"><i class="icon-equalizer"></i></a>
-            <form action="" method="get" class="form-filter-product js-filter-open">
+            <form action="{% url "filter" %}" method="get" class="form-filter-product js-filter-open" name="filter">
+                {% csrf_token %}
                 <span class="close-left js-close"><i class="icon-close f-20"></i></span>
                 <div class="product-filter-wrapper">
                     <div class="product-filter-inner text-left">
@@ -56,38 +57,17 @@
                                 <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Выберите категорию
                                 </button>
                                 <ul class="dropdown-menu">
-                                     {% for c in get_category %}
-                                    <li  >
-                                        {{ c.name }}
-                                    </li>
+                                     {% for c in view.get_category %}
+                                   <li>
+                                       <input class="form-check-input" type="checkbox" name="category" value="{{ c.id }}">
+                                       <label class="form-check-label" for="autoSizingCheck2">
+                                            {{ c.name }}
+                                       </label>
+                                  </li>
                                     {% endfor %}
                                 </ul>
                             </div>
                         </div>
-                        <!--<div class="product-filter">
-                            <div class="form-group">
-                                <span class="title-filter">Color</span>
-                                <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Choose color
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>Choose color</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="product-filter">
-                            <div class="form-group">
-                                <span class="title-filter">Size</span>
-                                <button class="dropdown-toggle form-control" type="button" data-toggle="dropdown">Choose size
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li>Choose size</li>
-                                    <li>S</li>
-                                    <li>M</li>
-                                    <li>L</li>
-                                    <li>XL</li>
-                                </ul>
-                            </div>
-                        </div> -->
 
                         <div class="product-filter">
                             <div class="form-group">
@@ -95,12 +75,16 @@
                                 <div class="filter-content">
                                 
                                     <div class="price-range-holder">
-                                        <!--<input type="text" class="price-slider" name="price" value="{{ products.price }}">-->
-                                      <input type="range" name="price" id="price" value="" min="{{ min_price.price__min }}" max="{{ max_price.price__max }}">
+                                    <!-- <input type="text" class="price-slider" name="price"  data-slider-min="{{ min_price.price__min  }}" data-slider-max="{{ max_price.price__max  }}" data-slider-step="5" data-slider-value="[250,450]">-->
+                                        <!--  <input type="range" name="price" id="price" value="" min="{{ min_price.price__min }}" max="{{ max_price.price__max }}">-->
+                                        <!-- <input id="ex2" type="form-control-range" class="span2" value="" data-slider-min="{{ min_price.price__min  }}" data-slider-max="{{ max_price.price__max  }}" data-slider-step="5" data-slider-value="[250,450]"/>--> 
+                                        
+                                        <input type="number" class="form-control" id="examp" placeholder="Минимальная цена"name="min_price" value="">
+                                        <input type="number" class="form-control" id="examp" placeholder="Максимальная цена" name="max_price" value="">
 
                                     </div>
                                     <span class="min-max">
-                                        Price: ${{ min_price.price__min }} — ${{ max_price.price__max }}
+                                        Price: ${{ view.min_price.price__min }} — ${{ view.max_price.price__max }}
                                     </span>
                                     
                                 </div>
@@ -111,9 +95,6 @@
                     <div class="product-filter-button-group clearfix">
                         <div class="product-filter-button">
                             <button class="btn-submit" type="sumbit" >Fillter </button>
-                        </div>
-                        <div class="product-filter-button">
-                            <a href="" class="btn-submit">Clear </a>
                         </div>
                     </div>
                 </div>
@@ -204,7 +185,23 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $(document).on('click', '.dropdown-menu', function (e) {
+                            $(this).hasClass('keep_open') && e.stopPropagation(); // This replace if conditional.
+                            
+            }); 
+                
+        });
 
 
+// With JQuery
+$("#ex2").slider({});
 
+// Without JQuery
+var slider = new Slider('#ex2', {});
+
+
+    </script>
 {% endblock %}
