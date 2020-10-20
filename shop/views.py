@@ -11,17 +11,7 @@ from django.views.decorators.http import require_GET, require_POST
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
 
-
-
-@require_POST
-def sorte_product(request):
-    """Сортировка"""
-    form = SorteProductForm(request.POST)
-    if form.is_valid():
-        cd = [i for i in form.cleaned_data ]
-        products = Product.objects.filter(draft=False).order_by(*cd)
-        return render(request, "shop/product/product_list.html", {"products":products})
-
+from django.contrib.postgres.search import TrigramSimilarity
 
 class PriceCategory:
 
@@ -82,20 +72,50 @@ class FilterProduct(PriceCategory, ListView):
     """Фильтр продустов"""
     template_name = "shop/product/product_list.html"
     context_object_name = "products"
+    paginate_by = 10
 
     def get_queryset(self):
         price_range = [i for i in range(int(self.request.GET['min_price']), int(self.request.GET['max_price']))]
         queryset = Product.objects.filter( Q(category__in=self.request.GET.getlist("category")) | 
                                            Q(price__in=price_range)
                                           )
-        print(price_range)
-        print(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cateory'] = ''.join([f"category={x}&" for x in self.request.GET.getlist("category")])
         return context
+
+
+class SorteProduct(PriceCategory, ListView):
+    """Сортировка продукта"""
+    template_name = "shop/product/product_list.html"
+    context_object_name = "products"
+    paginate_by = 10
+
+    def get_queryset(self):
+        sort = [i for i in self.request.GET.keys()][:-1]
+        queryset = Product.objects.order_by(*sort)
+        return queryset
+
+
+class SearchProduct(ListView):
+    """Поиск продукта"""
+    template_name = "shop/product/product_list.html"
+    context_object_name = "products"
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = Product.objects.annotate(
+            similarity=TrigramSimilarity('name', self.request.GET.get('q')),
+        ).filter(similarity__gt=0.3).order_by('-similarity')
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['q'] = self.request.GET.get('q')
+        return context
+
 
 
 def add_review(request, pk):
