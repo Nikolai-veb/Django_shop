@@ -117,16 +117,15 @@ class SearchProduct(ListView):
         return context
 
 
-
-def add_review(request, pk):
+class AddReview(View):
     """Отзовы"""
-    product = Product.objects.get(id=pk, draft=False)
-    if request.method == 'POST':
-        form = ReviewForm(request.POST)
+    def post(self, request, pk):
+        product = Product.objects.get(id=pk, draft=False)
+        form = ReviewForm(self.request.POST)
         if form.is_valid():
             form = form.save(commit=False)
-            if request.POST.get("parent", None):
-                form.parent_id = (request.POST.get("parent"))
+            if self.request.POST.get("parent", None):
+                form.parent_id = (self.request.POST.get("parent"))
             form.product = product
             form.save()
         return redirect(product.get_absolute_url())
