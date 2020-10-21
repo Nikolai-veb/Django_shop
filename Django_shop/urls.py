@@ -20,11 +20,13 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    path('grappelli/', include('grappelli.urls')), # grappelli URLS
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
     path('cart/', include('cart.urls')),
     path('favorites/', include('favorites.urls')),
     path('orders/', include('orders.urls')),
+    path('blog/', include('blog.urls')),
     path("", include('shop.urls')),
 ]
 
