@@ -26,3 +26,22 @@ class Article(models.Model):
         ordering = ['-create']
 
 
+class Comment(models.Model):
+    """Комментарии"""
+    email = models.EmailField()
+    name = models.CharField("Имя", max_length=1000)
+    text =  models.TextField("Текст", max_length=50000)
+    parent = models.ForeignKey('self', verbose_name="Родитель", on_delete=models.CASCADE, null=True, blank=True)
+    article = models.ForeignKey(Article, verbose_name="Статья", on_delete=models.CASCADE, related_name="reviews")
+    create = models.DateTimeField(auto_now_add=True)
+    update = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "Комментарий"
+        verbose_name_plural = "Комментарии"
+
+
+    def __str__(self):
+        return f'{self.name}-{self.article}'
+
+

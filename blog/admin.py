@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Article
+from .models import Article, Comment
 
 
 @admin.register(Article)
@@ -10,3 +10,10 @@ class ArticleAdmin(admin.ModelAdmin):
    # prepopulated_fields = {"slug": ("title","user")}
     autocomplete_lookup_fields = {"slug":["title", "user"]}
     list_editable = ("draft",)
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_dislay = ("name", "email", "parent", "article")
+    list_filter = ("name", "email", "article", "create")
+    searche_fields = ("name", "article")
