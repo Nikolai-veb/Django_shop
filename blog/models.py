@@ -22,8 +22,9 @@ class Tag(models.Model):
 
 class Article(models.Model):
     """Модель статьи"""
-    user = models.ForeignKey(User, verbose_name="", on_delete=models.CASCADE, related_name="articles")
+    user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE, related_name="articles")
     title = models.CharField("Заголовок", max_length=500)
+    tags = models.ManyToManyField(Tag, verbose_name="Тэги", related_name="articles")
     image = models.ImageField("Изображение", upload_to="image_blog/", blank=True, null=True)
     body = models.TextField("Текст")
     draft = models.BooleanField("Черновик", default=False)

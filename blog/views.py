@@ -6,6 +6,7 @@ from django.views.generic.base import View
 class ArticleListView(ListView):
     """Обработчик статей"""
     model = Article
+    template_name = "blog/article_list.html"
     context_object_name = "articles"
 
     def get_queryset(self, tag_slug=None):

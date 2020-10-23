@@ -13,8 +13,8 @@ class TagAdmin(admin.ModelAdmin):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ( "id", "user", "title", "slug", "draft")
-    list_filter = ("title",)
-    search_fields = ("title",)
+    list_filter = ("title", "tags")
+    search_fields = ("title", "tags")
     prepopulated_fields = {"slug": ("title","user")}
     list_editable = ("draft",)
 

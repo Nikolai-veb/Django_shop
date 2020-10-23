@@ -18,7 +18,7 @@
         <div class="main-container blog--grid">
             <div class="container">
                 <div class="row">
-                          {% for article in articles %}
+                          {% for article in  articles %}
                     <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
                         <div class="blog-post-item item-grid">
                             <a class="hover-images" href="#">
@@ -27,7 +27,7 @@
                                 <div class="categories">
                                     {% for tag in tags %}
                             <div class="post-metas ver--grid">
-                        <a href="{% url "article_list_by_tag" tag.slug %}" rel="category tag">{{ article.tags.all|join:", "  }}</a>
+                        <a href="{% url "article_list_by_tag" tag.slug %}" rel="category tag">{{ tag.name  }}</a>
                             </div>
                                 <span class="post-comments-number">3</span>
                                         {% endfor %}
