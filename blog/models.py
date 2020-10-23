@@ -1,6 +1,23 @@
 from django.db import models
 from django.contrib.auth.models import User
 from PIL import Image
+from django.urls import reverse
+
+
+class Tag(models.Model):
+    """Таг"""
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=150, unique=True, db_index=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return  reverse("article_list_by_tag", kwargs={"tag_slug": self.slug})
+
+    class Meta:
+        verbose_name = "Тэг"
+        verbose_name_plural = "Тэги"
 
 
 class Article(models.Model):

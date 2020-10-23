@@ -1,0 +1,112 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block content %}
+        <!--hero-section-->
+        <div class="container container-fullwidth">
+            <div class="hero-section">
+                <div class="box-center v2">
+                    <h1 class="page-title">Blog Grid</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Elements</a></li>
+                        <li><a href="">Banner</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--end hero-section-->
+        <div class="main-container blog--grid">
+            <div class="container">
+                <div class="row">
+                          {% for article in articles %}
+                    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                        <div class="blog-post-item item-grid">
+                            <a class="hover-images" href="#">
+                                <img src="{% if article.image %}{{ article.image.url }}{% else %}{% static "img/blog/grid_1.jpg" %}{% endif %}" alt="" class="img-reponsive">
+                            </a>
+                                <div class="categories">
+                                    {% for tag in tags %}
+                            <div class="post-metas ver--grid">
+                        <a href="{% url "article_list_by_tag" tag.slug %}" rel="category tag">{{ article.tags.all|join:", "  }}</a>
+                            </div>
+                                <span class="post-comments-number">3</span>
+                                        {% endfor %}
+                            </div>
+
+                            <div class="blog-post-info">
+                                <div class="post-date">{{ article.create  }}</div>
+                                <h3 class="post-name"><a href="#">{{ article.title }}</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <div class="nav-button text-center">
+                    <a class="btn-loadmore"><i class="icon-refresh f-15"></i>Load more</a>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container container-42">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="menu-footer">
+                            <ul>
+                                <li><a href="#">Shipping</a></li>
+                                <li><a href="#">Terms & Conditions</a></li>
+                                <li><a href="#">Privacy Policy</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-4">
+                        <div class="newletter-form">
+                            <h3 class="footer-title text-center">Newsletter</h3>
+                            <form action="#">
+                                <input type="text" name="s" placeholder="Email Adress..." class="form-control">
+                                <button type="submit" class="btn btn-submit">
+                                    <i class="fa fa-angle-right"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4">
+                        <div class="social">
+                            <a href="#" title="twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                            <a href="#" title="facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                            <a href="#" title="google plus">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                            <a href="#" title="Pinterest">
+                            <i class="fa fa-pinterest-p"></i>
+                        </a>
+                            <a href="#" title="rss">
+                            <i class="fa fa-rss"></i>
+                        </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <a href="#" class="scroll_top">SCROLL TO TOP<span></span></a>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
