@@ -8,11 +8,11 @@
 <div class="order_info">
    <h3>Your order</h3>
    <ul>
-      {% for item in cart %}
+       {% for cart in cart.inter %} 
       <li>
-         {{ item.quantity }}x {{ item.product.name }}
+         {{ cart.quantity }}x {{ cart.product.name }}
          <span>
-            ${{ item.total_price }}
+            ${{ cart.total_price }}
          </span>
       </li>
       {% endfor %}
