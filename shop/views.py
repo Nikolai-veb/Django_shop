@@ -2,79 +2,130 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product, Review, Rating, ProductImages
-from .forms import ReviewForm, RatingForm
+from .forms import ReviewForm, RatingForm, SorteProductForm
 from cart.forms import CartAddProductForm
 from account.models import Profile
-from django.db.models import Max, Min
+from django.db.models import Max, Min, Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.views.decorators.http import require_GET, require_POST
+from django.views.generic.base import View
+from django.views.generic import ListView, DetailView
+
+from django.contrib.postgres.search import TrigramSimilarity
+
+class PriceCategory:
+
+    def get_category(self):
+        return Category.objects.all()
+
+    def get_price(self):
+        return Product.objects.filter(draft=False).values('price')
+    
+    def min_price(self):
+        return Product.objects.all().aggregate(Min('price'))
+    
+    def max_price(self):
+        return Product.objects.all().aggregate(Max('price'))
 
 
-def get_categories():
-    categories = Category.objects.all()
-    return categories
+
+class ProductListView(PriceCategory, ListView):
+    """Класс обработки продуктов"""
+    model = Product
+    template_name = "shop/product/product_list.html"
+    context_object_name = "products"
+    paginate_by = 10
+
+    def get_queryset(self):
+        category_slug = self.kwargs
+        queryset = Product.objects.filter(draft=False)
+        if  category_slug:
+            category = get_object_or_404(Category, slug=category_slug['slug'])
+            queryset = Product.objects.filter(category=category)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+        context['cart_product_form'] = CartAddProductForm()
+        context['profile'] = Profile.objects.all()
+        return context
 
 
 
-def product_list(request, category_slug=None):
-    get_category = get_categories()
-    max_price = Product.objects.all().aggregate(Max('price'))
-    min_price = Product.objects.all().aggregate(Min('price'))
-    products = Product.objects.filter(draft=False)
-    paginator = Paginator(products, 20)
-    page = request.GET.get('page')
-    try:
-        posts = paginator.page(page)
-    except PageNotAnInteger:
-        # Если страница не является целым числом возвращаем 1 страницу
-        posts = paginator.page(1)
-    except EmptyPage:
-        posts = paginator.page(paginator.num_pages)
-    category = None
-    categories = Category.objects.all()
-    profile = Profile.objects.all()
-    cart_product_form = CartAddProductForm()
-    if category_slug:
-        category = get_object_or_404(Category, slug=category_slug)
-        products = Product.objects.filter(category=category)
-    return render(request, "shop/product/product_list.html", {'products': products,
-                                                              'categories': categories,
-                                                              'category': category,
-                                                              'cart_product_form': cart_product_form,
-                                                              'profile': profile,
-                                                              'max_price': max_price,
-                                                              'min_price': min_price,
-                                                              'page': page,
-                                                              'get_category': get_category,
-                                                              })
+class ProductDetailView(PriceCategory, DetailView):
+    """Класс обрботки продукта"""
+    model = Product
+    id_field = "pk"
+    template_name = "shop/product/product_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["star_form"] = RatingForm()
+        context["cart_product_form"] = CartAddProductForm()
+        context["form"] = ReviewForm()
+        return context
 
 
-def filter_products(request):
-    """Фильтр продуктов"""
-    filters = Product.objects.filter(price__in=request.GET.get_list("price"))
-    return
+
+class FilterProduct(PriceCategory, ListView):
+    """Фильтр продустов"""
+    template_name = "shop/product/product_list.html"
+    context_object_name = "products"
+    paginate_by = 10
+
+    def get_queryset(self):
+        price_range = [i for i in range(int(self.request.GET['min_price']), int(self.request.GET['max_price']))]
+        queryset = Product.objects.filter( Q(category__in=self.request.GET.getlist("category")) | 
+                                           Q(price__in=price_range)
+                                          )
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cateory'] = ''.join([f"category={x}&" for x in self.request.GET.getlist("category")])
+        return context
 
 
-def product_detail(request, id, slug):
-    product = get_object_or_404(Product, id=id, slug=slug, draft=False)
-    star_form = RatingForm()
-    cart_product_form = CartAddProductForm()
-    form = ReviewForm()
-    return render(request, "shop/product/product_detail.html", {'product': product,
-                                                                'cart_product_form': cart_product_form,
-                                                                'star_form': star_form,
-                                                                'form': form,
-                                                                })
+class SorteProduct(PriceCategory, ListView):
+    """Сортировка продукта"""
+    template_name = "shop/product/product_list.html"
+    context_object_name = "products"
+    paginate_by = 10
+
+    def get_queryset(self):
+        sort = [i for i in self.request.GET.keys()][:-1]
+        queryset = Product.objects.order_by(*sort)
+        return queryset
 
 
-def add_review(request, pk):
+class SearchProduct(ListView):
+    """Поиск продукта"""
+    template_name = "shop/product/product_list.html"
+    context_object_name = "products"
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = Product.objects.annotate(
+            similarity=TrigramSimilarity('name', self.request.GET.get('q')),
+        ).filter(similarity__gt=0.3).order_by('-similarity')
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['q'] = self.request.GET.get('q')
+        return context
+
+
+class AddReview(View):
     """Отзовы"""
-    product = Product.objects.get(id=pk, draft=False)
-    if request.method == 'POST':
-        form = ReviewForm(request.POST)
+    def post(self, request, pk):
+        product = Product.objects.get(id=pk, draft=False)
+        form = ReviewForm(self.request.POST)
         if form.is_valid():
             form = form.save(commit=False)
-            if request.POST.get("parent", None):
-                form.parent_id = (request.POST.get("parent"))
+            if self.request.POST.get("parent", None):
+                form.parent_id = (self.request.POST.get("parent"))
             form.product = product
             form.save()
         return redirect(product.get_absolute_url())
@@ -104,24 +155,3 @@ def add_rating_star(self, request):
         else:
             return HttpResponse(status=400)
 
-# class BookmarkView(View):
-#     # в данную переменную будет устанавливаться модель закладок, которую необходимо обработать
-#     model = None
-#
-#     def post(self, request, pk):
-#         # нам потребуется пользователь
-#         user = auth.get_user(request)
-#         # пытаемся получить закладку из таблицы, или создать новую
-#         bookmark, created = self.model.objects.get_or_create(user=user, obj_id=pk)
-#         # если не была создана новая закладка,
-#         # то считаем, что запрос был на удаление закладки
-#         if not created:
-#             bookmark.delete()
-#
-#         return HttpResponse(
-#             json.dumps({
-#                 "result": created,
-#                 "count": self.model.objects.filter(obj_id=pk).count()
-#             }),
-#             content_type="application/json"
-#         )

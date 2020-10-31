@@ -111,5 +111,9 @@ media/
 !**/migrations
 !**/migrations/__init__.py
 
+<<<<<<< HEAD
+.bundle/
+=======
 
 venv
+>>>>>>> 11423e400f6a0c3edbc9abfbb5a2bf142654bf86

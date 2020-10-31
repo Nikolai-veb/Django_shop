@@ -27,11 +27,11 @@
                 </div>
                 <div class="modal-body">
                     <div class="input-group">
-                        <form method="get" class="searchform" action="/search" role="search">
+                        <form method="get" class="searchform" action="{% url "search" %}" role="search">
                             <input type="hidden" name="type" value="product">
                             <input type="text" name="q" class="form-control control-search">
                             <span class="input-group-btn">
-                              <button class="btn btn-default button_search" type="button"><i data-toggle="dropdown" class="fa fa-search"></i></button>
+                              <button class="btn btn-default button_search" type="submit"><i data-toggle="dropdown" class="fa fa-search"></i></button>
                             </span>
                         </form>
                     </div>
@@ -148,9 +148,9 @@
                                                 <li {% if not category %} class="level2" {% endif %}>
                                                     <a href="{% url "product_list" %}" title="Home">Главная</a>
                                                 </li>
-                                                {% for c in categories %}
+                                                {% for c in view.get_category %}
                                                 <li {% if category.slug == c.slug %} class="level2" {% endif %}>
-                                                    <a href="{{ c.get_absolute_url   }}" title="Home Clean">{{ c.name }}</a>
+                                                    <a href="{{ c.get_absolute_url }}" title="Home Clean">{{ c.name }}</a>
                                                 </li>
                                                 {% endfor %}
                                         </ul>
@@ -248,9 +248,7 @@
                                         <a href="#">Blog</a>
                                         <span class="plus js-plus-icon"></span>
                                         <ul class="dropdown-menu menu-level-1">
-                                            <li class="level2"><a href="blog_classic.html" title="Blog Classic">Blog Classic</a></li>
-                                            <li class="level2"><a href="blog_grid.html" title="Blog Grid">Blog Grid</a></li>
-                                            <li class="level2"><a href="single_port_woomaper.html" title="Blog Single port Woomaper">Blog Single port Woomaper</a></li>
+                                            <li class="level2"><a href="{% url "article_list" %}" title="Blog Grid">Blog Grid</a></li>
                                         </ul>
                                     </li>
                                 </ul>
