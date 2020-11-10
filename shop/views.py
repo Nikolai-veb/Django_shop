@@ -1,4 +1,3 @@
-
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Category, Product, Review, Rating, ProductImages
@@ -13,6 +12,7 @@ from django.views.generic import ListView, DetailView
 
 from django.contrib.postgres.search import TrigramSimilarity
 
+
 class PriceCategory:
 
     def get_category(self):
@@ -20,13 +20,12 @@ class PriceCategory:
 
     def get_price(self):
         return Product.objects.filter(draft=False).values('price')
-    
+
     def min_price(self):
         return Product.objects.all().aggregate(Min('price'))
-    
+
     def max_price(self):
         return Product.objects.all().aggregate(Max('price'))
-
 
 
 class ProductListView(PriceCategory, ListView):
@@ -39,7 +38,7 @@ class ProductListView(PriceCategory, ListView):
     def get_queryset(self):
         category_slug = self.kwargs
         queryset = Product.objects.filter(draft=False)
-        if  category_slug:
+        if category_slug:
             category = get_object_or_404(Category, slug=category_slug['slug'])
             queryset = Product.objects.filter(category=category)
         return queryset
@@ -50,7 +49,6 @@ class ProductListView(PriceCategory, ListView):
         context['cart_product_form'] = CartAddProductForm()
         context['profile'] = Profile.objects.all()
         return context
-
 
 
 class ProductDetailView(PriceCategory, DetailView):
@@ -67,7 +65,6 @@ class ProductDetailView(PriceCategory, DetailView):
         return context
 
 
-
 class FilterProduct(PriceCategory, ListView):
     """Фильтр продустов"""
     template_name = "shop/product/product_list.html"
@@ -76,8 +73,8 @@ class FilterProduct(PriceCategory, ListView):
 
     def get_queryset(self):
         price_range = [i for i in range(int(self.request.GET['min_price']), int(self.request.GET['max_price']))]
-        queryset = Product.objects.filter( Q(category__in=self.request.GET.getlist("category")) | 
-                                           Q(price__in=price_range)
+        queryset = Product.objects.filter(Q(category__in=self.request.GET.getlist("category")) |
+                                          Q(price__in=price_range)
                                           )
         return queryset
 
@@ -119,6 +116,7 @@ class SearchProduct(ListView):
 
 class AddReview(View):
     """Отзовы"""
+
     def post(self, request, pk):
         product = Product.objects.get(id=pk, draft=False)
         form = ReviewForm(self.request.POST)
@@ -154,4 +152,3 @@ def add_rating_star(self, request):
             return HttpResponse(status=201)
         else:
             return HttpResponse(status=400)
-

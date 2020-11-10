@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'grappelli',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -88,8 +88,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
          'NAME': 'django_shop',
-         'USER': 'nikolai',
-         'PASSWORD': '242003109695Nik',
+         'USER': 'nik',
+         'PASSWORD': 'qwe240396',
     }
 }
 

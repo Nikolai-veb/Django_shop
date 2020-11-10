@@ -6,9 +6,9 @@ from PIL import Image
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_dislay = ("name", "slug")
+    list_display = ("name", "slug")
     list_filter = ("name",)
-    searche_fields = ("name",)
+    search_fields = ("name",)
     prepopulated_fields = {'slug': ('name',)}
 
 
@@ -81,12 +81,12 @@ class ProductImagesAdmin(admin.ModelAdmin):
 
 @admin.register(RatingStar)
 class RatingStarAdmin(admin.ModelAdmin):
-    list_dislay = ("id", "value")
+    list_display = ("id", "value")
 
 
 @admin.register(Review)
 class ReviewAdmin(admin.ModelAdmin):
-    list_dislay = ("name", "email", "parent", "product", "create")
+    list_display = ("name", "email", "parent", "product", "create")
     list_filter = ("name", "email", "product", "create")
-    searche_fields = ("name", "product")
+    search_fields = ("name", "product")
 
