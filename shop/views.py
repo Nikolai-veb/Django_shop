@@ -80,7 +80,7 @@ class FilterProduct(PriceCategory, ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cateory'] = ''.join([f"category={x}&" for x in self.request.GET.getlist("category")])
+        context['category'] = ''.join([f"category={x}&" for x in self.request.GET.getlist("category")])
         return context
 
 

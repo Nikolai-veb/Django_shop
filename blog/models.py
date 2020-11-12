@@ -13,7 +13,7 @@ class Tag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return  reverse("article_list_by_tag", kwargs={"tag_slug": self.slug})
+        return reverse("article_list_by_tag", kwargs={"tag_slug": self.slug})
 
     class Meta:
         verbose_name = "Тэг"
@@ -32,8 +32,8 @@ class Article(models.Model):
     create = models.DateTimeField("Дата создания", auto_now_add=True)
     update = models.DateTimeField("Дата обнавления", auto_now=True)
 
-    def get_asolute_url(self):
-        return reverce('article_detail', kwargs={"pk": self.id}) 
+    def get_absolute_url(self):
+        return reverse('article_detail', kwargs={"pk": self.id})
 
     def __str__(self):
         return self.title
@@ -48,7 +48,7 @@ class Comment(models.Model):
     """Комментарии"""
     email = models.EmailField()
     name = models.CharField("Имя", max_length=1000)
-    text =  models.TextField("Текст", max_length=50000)
+    text = models.TextField("Текст", max_length=50000)
     parent = models.ForeignKey('self', verbose_name="Родитель", on_delete=models.CASCADE, null=True, blank=True)
     article = models.ForeignKey(Article, verbose_name="Статья", on_delete=models.CASCADE, related_name="reviews")
     create = models.DateTimeField(auto_now_add=True)
@@ -58,8 +58,5 @@ class Comment(models.Model):
         verbose_name = "Комментарий"
         verbose_name_plural = "Комментарии"
 
-
     def __str__(self):
         return f'{self.name}-{self.article}'
-
-

@@ -1,6 +1,8 @@
 from django.contrib.auth.models import User
 from django import forms
 from .models import Profile
+
+
 class UserRegisterForm(forms.ModelForm):
     """Форма регистрацыи"""
     password = forms.CharField(label="Пороль", widget=forms.PasswordInput)
@@ -10,9 +12,9 @@ class UserRegisterForm(forms.ModelForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')
         widgets = {
-            "username": forms.TextInput(attrs={"class":"", "id": ""}),
-            "first_name": forms.TextInput(attrs={"class":"", "id": ""}),
-            "last_name": forms.TextInput(attrs={"class":"", "id": ""}),
+            "username": forms.TextInput(attrs={"class": "", "id": ""}),
+            "first_name": forms.TextInput(attrs={"class": "", "id": ""}),
+            "last_name": forms.TextInput(attrs={"class": "", "id": ""}),
             "email": forms.EmailInput(attrs={"class": ""}),
         }
 
@@ -25,6 +27,7 @@ class UserRegisterForm(forms.ModelForm):
 
 class UserEditForm(forms.ModelForm):
     """Форма для редактирования встроенных полей"""
+
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'email')
@@ -32,6 +35,7 @@ class UserEditForm(forms.ModelForm):
 
 class ProfileEditForm(forms.ModelForm):
     """Форма для редоктирования созданных полей """
+
     class Meta:
         model = Profile
         fields = ('photo', 'date_birth')
