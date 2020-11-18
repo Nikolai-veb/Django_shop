@@ -21,11 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="dca8e63a-e61b-487b-86f5-1af40ad9d613" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article_detail.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,13 +135,12 @@
     <state x="0" y="34" width="1600" height="866" key="SettingsEditor" timestamp="1604153129589">
       <screen x="0" y="34" width="1600" height="866" />
     </state>
-    <state x="55" y="31" width="1304" height="737" key="SettingsEditor/0.27.1366.741/1366.0.1024.768@0.27.1366.741" timestamp="1596748402768" />
     <state x="2" y="35" key="SettingsEditor/0.32.1024.736@0.32.1024.736" timestamp="1600376956921" />
     <state x="0" y="34" width="1600" height="866" key="SettingsEditor/0.34.1600.866@0.34.1600.866" timestamp="1604153129588" />
-    <state x="273" y="100" width="1050" height="798" key="search.everywhere.popup" timestamp="1604148884260">
+    <state x="273" y="100" width="1050" height="798" key="search.everywhere.popup" timestamp="1605728932313">
       <screen x="0" y="34" width="1600" height="866" />
     </state>
     <state x="175" y="88" width="672" height="678" key="search.everywhere.popup/0.32.1024.736@0.32.1024.736" timestamp="1600370876996" />
-    <state x="273" y="100" width="1050" height="798" key="search.everywhere.popup/0.34.1600.866@0.34.1600.866" timestamp="1604148884260" />
+    <state x="273" y="100" width="1050" height="798" key="search.everywhere.popup/0.34.1600.866@0.34.1600.866" timestamp="1605728932313" />
   </component>
 </project>

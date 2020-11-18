@@ -1,7 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
+
+from .forms import CommentForm
 from .models import Article, Comment, Tag
 from django.views.generic import ListView, DetailView
 from django.views.generic.base import View
+
 
 class ArticleListView(ListView):
     """Обработчик статей"""
@@ -10,27 +13,23 @@ class ArticleListView(ListView):
     context_object_name = "articles"
 
     def get_queryset(self, tag_slug=None):
-        queryset = Article.objects.filter(draft=True)
+        queryset = Article.objects.filter(draft=False)
         if tag_slug:
             tag = get_object_or_404(Tag, slug=tag_slug)
             queryset = Article.objects.filter(tags__in=[tag])
         return queryset
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['tags'] = Tag.objects.all()
-        return context
-
 
 class ArticleDetailView(DetailView):
-    "Оработчик статьи"
+    """Оработчик статьи"""
+    context_object_name = "article"
     model = Article
     id_field = "pk"
 
 
-
 class AddComment(View):
     """Обработчик комментариев"""
+
     def post(self, request, pk):
         article = Article.objects.get(id=pk, draft=False)
         form = CommentForm(self.request.POST)
@@ -41,4 +40,3 @@ class AddComment(View):
             form.article = article
             form.save()
         return redirect(article.get_absolute_url())
-

@@ -21,16 +21,18 @@
                           {% for article in  articles %}
                     <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
                         <div class="blog-post-item item-grid">
-                            <a class="hover-images" href="#">
+                            <a class="hover-images" href="{% url "article_detail"  article.id %}">
                                 <img src="{% if article.image %}{{ article.image.url }}{% else %}{% static "img/blog/grid_1.jpg" %}{% endif %}" alt="" class="img-reponsive">
                             </a>
                                 <div class="categories">
-                                    {% for tag in tags %}
+                                    {% for tag in article.tags.all %}
                             <div class="post-metas ver--grid">
                         <a href="{% url "article_list_by_tag" tag.slug %}" rel="category tag">{{ tag.name  }}</a>
+
                             </div>
+                                    {% endfor %}
                                 <span class="post-comments-number">3</span>
-                                        {% endfor %}
+
                             </div>
 
                             <div class="blog-post-info">
