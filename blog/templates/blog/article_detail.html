@@ -10,29 +10,29 @@
         <div class="row">
             <div class="col-xs-12 col-sm-5 col-md-6">
                 <div class="product-images">
-                    <div class="main-img js-product-slider">
-                        <a href="#" class="hover-images effect"><img src="{% static "img/bottle.jpg" %}" alt="photo" class="img-reponsive"></a>
-                        <a href="#" class="hover-images effect"><img src="{% static "img/bottle_3.jpg" %}" alt="photo" class="img-reponsive"></a>
-                        <a href="#" class="hover-images effect"><img src="{% static "img/bottle2.jpg" %}" alt="photo" class="img-reponsive"></a>
-                    </div>
+<!--                    <div class="main-img js-product-slider">-->
+<!--                        <a href="#" class="hover-images effect"><img src="{% static "img/bottle.jpg" %}" alt="photo" class="img-reponsive"></a>-->
+                        <a href="#" class="hover-images effect"><img src="{% if article.image %}{{ article.image.url }}{% else %}{% static "img/bottle_3.jpg" %}{% endif %}" alt="photo" class="img-reponsive"></a>
+<!--                        <a href="#" class="hover-images effect"><img src="{% static "img/bottle2.jpg" %}" alt="photo" class="img-reponsive"></a>-->
+<!--                    </div>-->
                 </div>
-                <div class="multiple-img-list-ver2 js-click-product">
-                    <div class="product-col">
-                        <div class="img active">
-                            <img src="{% static "img/bottle.jpg" %}"alt="images" class="img-responsive">
-                        </div>
-                    </div>
-                    <div class="product-col">
-                        <div class="img">
-                            <img src="{% static "img/bottle_3.jpg" %}" alt="images" class="img-responsive">
-                        </div>
-                    </div>
-                    <div class="product-col">
-                        <div class="img">
-                            <img src="{% static "img/bottle2.jpg" %}"  alt="images" class="img-responsive">
-                        </div>
-                    </div>
-                </div>
+<!--                <div class="multiple-img-list-ver2 js-click-product">-->
+<!--&lt;!&ndash;                    <div class="product-col">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="img active">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <img src="{% static "img/bottle.jpg" %}"alt="images" class="img-responsive">&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                    <div class="product-col">-->
+<!--                        <div class="img">-->
+<!--                            <img src="{% static "img/bottle_3.jpg" %}" alt="images" class="img-responsive">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--&lt;!&ndash;                    <div class="product-col">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="img">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <img src="{% static "img/bottle2.jpg" %}"  alt="images" class="img-responsive">&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
+<!--                </div>-->
             </div>
             <div class="col-xs-12 col-sm-7 col-md-6">
                 <div class="single-product-info">
@@ -43,19 +43,11 @@
                             <span class="star star-2"></span>
                             <span class="star star-1"></span>
                         </div>
-                        <span class="review">(1 customer review)</span>
+                        <span class="review">( {{ article.reviews.count }} customer review)</span>
                     </div>
-                    <h3 class="product-title"><a href="#">External-Affiliate Product</a></h3>
-                    <div class="product-price">
-                        <span class="old">$222.00</span>
-                        <span>$330.00</span>
-                    </div>
-                    <p class="product-desc">Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                    <div class="action v2">
-                        <a href="#" class="link-ver1 add-cart">Purchase On Amazon</a>
-                        <a href="#" class="link-ver1 wish"><i class="icon-heart f-15"></i></a>
-                        <div class="clearfix"></div>
-                    </div>
+                    <h3 class="product-title">{{ article.title }}</h3>
+
+                    <p class="product-desc">{{ article.body }}</p>
                     <div class="share-social">
                         <span>Share :</span>
                         <a href="#"><i class="fa fa-twitter"></i></a>
@@ -70,19 +62,81 @@
     <!--single-product-detail-->
     <div class="single-product-tab">
         <ul class="nav nav-tabs text-center">
-            <li class="active"><a data-toggle="pill" href="#desc">Description</a></li>
-            <li><a data-toggle="pill" href="#info">Additional Information</a></li>
-            <li><a data-toggle="pill" href="#review">Reviews (1)</a></li>
+<!--            <li class="active"><a data-toggle="pill" href="#desc">Description</a></li>-->
+            <li><a data-toggle="pill" href="#review">Reviews ({{ article.reviews.count }}) </a></li>
         </ul>
         <div class="tab-content">
-            <div id="desc" class="tab-pane fade in active">
-                <p class="p-center">Constructed in cotton sweat fabric, this lovely piece, lacus eu mattis auctor, dolor lectus venenatis nulla, at tristique eros sem vel ante. Sed leo enim, iaculis ornare tristique non, vulputate sit amet ante. Mauris placerat eleifend leo.</p>
-            </div>
-            <div id="info" class="tab-pane fade in">
-                <p class="p-center">Constructed in cotton sweat fabric, this lovely piece, lacus eu mattis auctor, dolor lectus venenatis nulla, at tristique eros sem vel ante. Sed leo enim, iaculis ornare tristique non, vulputate sit amet ante. Mauris placerat eleifend leo.</p>
-            </div>
+<!--            <div id="desc" class="tab-pane fade in active">-->
+<!--                <p class="p-center"> {{ article}}</p>-->
+<!--            </div>-->
             <div id="review" class="tab-pane fade in ">
-                <p class="p-center">Constructed in cotton sweat fabric, this lovely piece, lacus eu mattis auctor, dolor lectus venenatis nulla, at tristique eros sem vel ante. Sed leo enim, iaculis ornare tristique non, vulputate sit amet ante. Mauris placerat eleifend leo.</p>
+
+                <div class="row">
+                    <div class="single-form-left">
+                        <!-- contact form grid -->
+                        <div class="contact-single">
+                            <h3 class="editContent">
+                                Оставить отзыв
+                            </h3>
+                            <form action="{% url 'add_comment' article.id %}" method="post" class="mt-4" id="formReview">
+                                {% csrf_token %}
+                                <input type="hidden" name="parent" id="contactparent" value="">
+                                <div class="form-group editContent">
+                                    <label for="contactcomment" class="editContent">
+                                        Ваш комментарий *
+                                    </label>
+                                    {{ form.text }}
+                                </div>
+                                <div class="d-sm-flex">
+                                    <div class="col-sm-6 form-group p-0 editContent">
+                                        <label for="contactusername" class="editContent">
+                                            Имя *
+                                        </label>
+                                        {{ form.name }}
+                                    </div>
+                                    <div class="col-sm-6 form-group ml-sm-3 editContent">
+                                        <label for="contactemail" class="editContent">
+                                            Email *
+                                        </label>
+                                        {{ form.email }}
+                                    </div>
+                                </div>
+                                <button type="submit" class=" btn btn-success ">
+                                    Отправить
+                                </button>
+                            </form>
+                        </div>
+                        <!--  //contact form grid ends here -->
+                    </div>
+                </div>
+                {% for review in article.reviews.all %}
+                <div class="media py-5">
+                    <img src="{% static 'images/te2.jpg' %}" class="mr-3 img-fluid" alt="image">
+                    <div class="media-body mt-4">
+                        <h5 class="mt-0 editContent">
+                            {{ review.name }}
+                        </h5>
+                        <p class="mt-2 editContent">
+                            {{ review.text }}
+                        </p>
+                        <a href="#formReview"
+                           onclick="add_review('{{ review.name }}', '{{ review.id }}')">Ответить</a>
+                        {% for rew in review.reviews.all %}
+                        <div class="media mt-5 editContent">
+                            <a class="pr-3" href="#">
+                                <img src="{% static 'images/te2.jpg' %}" class="img-fluid "
+                                     alt="image">
+                            </a>
+                            <div class="media-body">
+                                <h5 class="mt-0 editContent">{{ rew.name }}</h5>
+                                <p class="mt-2 editContent">{{ rew.text }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
             </div>
         </div>
     </div>

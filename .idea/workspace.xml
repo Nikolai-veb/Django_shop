@@ -22,7 +22,6 @@
     <list default="true" id="dca8e63a-e61b-487b-86f5-1af40ad9d613" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/article_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/article_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/blog/templates/blog/article_list.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
