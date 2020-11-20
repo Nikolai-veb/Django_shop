@@ -4,6 +4,7 @@ from shop.models import Product
 from .cart import Cart
 from .forms import CartAddProductForm
 
+
 @require_POST
 def cart_add(request, product_id):
     """Oбработчик для добавления товаров в корзину"""
@@ -23,6 +24,7 @@ def cart_remove(request, product_id):
     cart.remove(product)
     return redirect('cart_detail')
 
+
 def cart_detail(request):
     """Oбработчик для страницы списка товаров, добавленных в корзину"""
     cart = Cart(request)
@@ -30,8 +32,6 @@ def cart_detail(request):
     for item in cart.inter():
         item['update_quantity_form'] = CartAddProductForm(
             initial={'quantity': item['quantity'],
-                    'update': True}
+                     'update': True}
         )
     return render(request, 'cart/cart_detail.html', {'cart': cart, 'products': products})
-
-

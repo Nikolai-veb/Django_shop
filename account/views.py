@@ -1,19 +1,20 @@
-from django.shortcuts import render,  get_object_or_404
+from django.shortcuts import render, get_object_or_404
 from .forms import UserRegisterForm, ProfileEditForm, UserEditForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
+
 
 def register(request):
     """Обработчик регистрации пользователя"""
     if request.method == 'POST':
         user_form = UserRegisterForm(request.POST)
         if user_form.is_valid():
-           user_from = user_form.save(commit=False)
-           user_from.set_password(user_form.cleaned_data['password'])
-           #Создание Profile
-           Profile.objects.create(user=user_form)
-           user_from.save()
-           return render(request, 'account/register_done.html', {'user_from': user_from})
+            user_from = user_form.save(commit=False)
+            user_from.set_password(user_form.cleaned_data['password'])
+            # Создание Profile
+            Profile.objects.create(user=user_form)
+            user_from.save()
+            return render(request, 'account/register_done.html', {'user_from': user_from})
     else:
         user_form = UserRegisterForm()
         return render(request, 'account/register.html', {'user_form': user_form})
@@ -40,5 +41,3 @@ def profile(request, id):
     """Обработчик профиля"""
     profiles = get_object_or_404(Profile, id=id)
     return render(request, 'account/profile.html', {'profiles': profiles})
-
-

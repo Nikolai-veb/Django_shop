@@ -129,20 +129,21 @@ class AddReview(View):
         return redirect(product.get_absolute_url())
 
 
-def get_client_ip(self, request):
-    """Получение клиенского ip"""
-    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
-    if x_forwarded_for:
-        ip = x_forwarded_for.split(',')[0]
-    else:
-        ip = request.META.get('REMOTE_ADDR')
-    return ip
+class AddRatingView(View):
+    """Add rating"""
 
+    def get_client_ip(self, request):
+        """Получение клиенского ip"""
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip = x_forwarded_for.split(',')[0]
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        return ip
 
-def add_rating_star(self, request):
-    """Добавление рейтинга к фильму"""
-    if request.method == 'Post':
-        form = RatingForm(request.POST)
+    def post(self, request):
+        """Добавление рейтинга к фильму"""
+        form = RatingForm(self.request.POST)
         if form.is_valid():
             Rating.objects.update_or_create(
                 ip=self.get_client_ip(request),
