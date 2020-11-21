@@ -5,12 +5,13 @@ from shop.models import Product
 
 class Cart(object):
     """Управление корзиной"""
+
     def __init__(self, request):
         """Инциализацыя обьекта корзины"""
         self.session = request.session
         cart = self.session.get(settings.CART_SESSION_ID)
         if not cart:
-            #Сохраняем в пустую корзину
+            # Сохраняем в пустую корзину
             cart = self.session[settings.CART_SESSION_ID] = {}
         self.cart = cart
 
@@ -52,7 +53,6 @@ class Cart(object):
             carts.append(item)
         return carts
 
-
     def __len__(self):
         """Возвращает общее количество товаров в корзине."""
         return sum(item['quantity'] for item in self.cart.values())
@@ -66,11 +66,7 @@ class Cart(object):
         products = Product.objects.filter(id__in=product_ids)
         return products
 
-
-
     def clear(self):
         """Очистка корзины"""
         del self.session[settings.CART_SESSION_ID]
         self.save()
-
-

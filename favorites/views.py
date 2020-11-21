@@ -2,7 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST, require_GET
 from shop.models import Product
 from .bookmarks import Favorites
-#from .forms import FavoriteAddProductForm
+
+
+# from .forms import FavoriteAddProductForm
 
 @require_GET
 def favorite_add(request, product_id):

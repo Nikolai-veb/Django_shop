@@ -209,7 +209,7 @@
                 </div>
             </div>
             <!--single-product-tab-->
-        </div>
+
         <div class="information">
             <ul>
                 <li class="info-center text-center"><span>SKU :</span>
@@ -229,16 +229,17 @@
             <div class="container container-42">
                 <h3 class="title text-center">Related Products</h3>
                 <div class="owl-carousel owl-theme js-owl-product">
+                       {% for recommend in recommended %}
                     <div class="product-item">
                         <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static "img/products/highheels.jpg" %}" alt="products" class="img-reponsive"></a>
+                            <a href="#" class="hover-images effect"><img src="{% if recommend.poster  %}{{ recommend.poster.url }}{% else %}{% static "img/products/highheels.jpg" %}{% endif %}" alt="products" class="img-reponsive"></a>
                             <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
                             <a href="#" class="btn-quickview">QUICK VIEW</a>
                         </div>
                         <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Tia Slides in Brandy</a></h3>
+                            <h3 class="product-title"><a href="#">{{ recommend.name }}</a></h3>
                             <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
+                                <div class="product-price">${{ recommend.price }}</div>
                                 <div class="product-after-button">
                                     <a href="#" class="addcart">ADD TO CART</a>
                                 </div>
@@ -250,111 +251,10 @@
                                 <span class="star star-2"></span>
                                 <span class="star star-1"></span>
                             </div>
-                            <div class="product-price">$292.00</div>
+                            <div class="product-price">${{ recommend.price }}<</div>
                         </div>
                     </div>
-                    <div class="product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static "img/products/hoodie.jpg" %}" alt="photo" class="img-reponsive">
-                    <div class="ribbon-sale ver2"><span>sale</span></div>
-                    </a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Alabama Tee</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                            <div class="product-price">$292.00</div>
-                        </div>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static "img/products/bag_1.jpg" %}" alt="photo" class="img-reponsive">
-                    <div class="ribbon-new ver2"><span>new</span></div>
-                    </a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Denali Blanket Scarf</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                            <div class="product-price">$292.00</div>
-                        </div>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static "img/products/long.jpg" %}" alt="photo" class="img-reponsive">
-                    <div class="ribbon-sale ver2"><span>sale</span></div>
-                    </a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Flannel Button Under</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                            <div class="product-price">$292.00</div>
-                        </div>
-                    </div>
-                    <div class="product-item">
-                        <div class="product-images">
-                            <a href="#" class="hover-images effect"><img src="{% static "img/products/sunglasses_1.jpg" %}" alt="photo" class="img-reponsive"></a>
-                            <a href="#" class="btn-add-wishlist ver2"><i class="icon-heart"></i></a>
-                            <a href="#" class="btn-quickview">QUICK VIEW</a>
-                        </div>
-                        <div class="product-info-ver2">
-                            <h3 class="product-title"><a href="#">Large Cube Planter</a></h3>
-                            <div class="product-after-switch">
-                                <div class="product-price">$295.00</div>
-                                <div class="product-after-button">
-                                    <a href="#" class="addcart">ADD TO CART</a>
-                                </div>
-                            </div>
-                            <div class="rating-star">
-                                <span class="star star-5"></span>
-                                <span class="star star-4"></span>
-                                <span class="star star-3"></span>
-                                <span class="star star-2"></span>
-                                <span class="star star-1"></span>
-                            </div>
-                            <div class="product-price">$292.00</div>
-                        </div>
-                    </div>
+                     {% endfor %}
                 </div>
             </div>
         </div>

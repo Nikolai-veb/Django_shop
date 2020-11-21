@@ -13,6 +13,18 @@ from django.views.generic import ListView, DetailView
 from django.contrib.postgres.search import TrigramSimilarity
 
 
+class Recommended:
+    """Recommended products"""
+
+    def recommending(self, request):
+        favorites = [f_products for f_products in dict(request.session)['favorite']]
+        carts = [f_products for f_products in dict(request.session)['cart']]
+        product_id = list(set(favorites+carts))
+        products = [product.category for product in Product.objects.filter(id__in=product_id)]
+        r_product = Product.objects.filter(category__in=products)
+        return r_product
+
+
 class PriceCategory:
 
     def get_category(self):
@@ -51,7 +63,7 @@ class ProductListView(PriceCategory, ListView):
         return context
 
 
-class ProductDetailView(PriceCategory, DetailView):
+class ProductDetailView(PriceCategory, DetailView, Recommended):
     """Класс обрботки продукта"""
     model = Product
     id_field = "pk"
@@ -62,6 +74,7 @@ class ProductDetailView(PriceCategory, DetailView):
         context["star_form"] = RatingForm()
         context["cart_product_form"] = CartAddProductForm()
         context["form"] = ReviewForm()
+        context["recommended"] = self.recommending(self.request)
         return context
 
 
