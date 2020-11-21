@@ -1,5 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+
+from blog.models import Article
 from .models import Category, Product, Review, Rating, ProductImages
 from .forms import ReviewForm, RatingForm, SorteProductForm
 from cart.forms import CartAddProductForm
@@ -117,8 +119,11 @@ class SearchProduct(ListView):
 
     def get_queryset(self):
         queryset = Product.objects.annotate(
-            similarity=TrigramSimilarity('name', self.request.GET.get('q')),
-        ).filter(similarity__gt=0.3).order_by('-similarity')
+            similarity=TrigramSimilarity('name', self.request.GET.get('q')
+                                         ),).filter(similarity__gt=0.3).order_by('-similarity') or Article.objects.annotate(
+            similarity=TrigramSimilarity('title', self.request.GET.get('q')
+                                         ),).filter(similarity__gt=0.3).order_by('-similarity')
+
         return queryset
 
     def get_context_data(self, *args, **kwargs):
