@@ -31,7 +31,7 @@
 
                             </div>
                                     {% endfor %}
-                                <span class="post-comments-number">3</span>
+                                <span class="post-comments-number">{{ article.tags.all.count }}</span>
 
                             </div>
 
@@ -44,6 +44,9 @@
                     {% endfor %}
 
                 </div>
+            </div>
+        </div>
+
 {% endblock %}
 
 
