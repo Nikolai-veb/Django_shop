@@ -1,7 +1,14 @@
 from django.shortcuts import render, get_object_or_404
-from .forms import UserRegisterForm, ProfileEditForm, UserEditForm
+from .forms import UserRegisterForm, ProfileEditForm, UserEditForm, LoginForm
+
 from .models import Profile
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
+
+
+class CastomLoginView(LoginView):
+    form_class = LoginForm
+    template_name = "registration/c_login.html"
 
 
 def register(request):
@@ -12,7 +19,7 @@ def register(request):
             user_from = user_form.save(commit=False)
             user_from.set_password(user_form.cleaned_data['password'])
             # Создание Profile
-            Profile.objects.create(user=user_form)
+            Profile.objects.create(username=user_form)
             user_from.save()
             return render(request, 'account/register_done.html', {'user_from': user_from})
     else:
