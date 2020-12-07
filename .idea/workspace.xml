@@ -20,8 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dca8e63a-e61b-487b-86f5-1af40ad9d613" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +90,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -122,18 +122,24 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="546" y="184" width="424" height="483" key="FileChooserDialogImpl" timestamp="1605207112634">
-      <screen x="0" y="34" width="1600" height="866" />
+    <state x="258" y="124" width="1084" height="709" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607116349969">
+      <screen x="0" y="32" width="1600" height="868" />
     </state>
+    <state x="258" y="124" width="1084" height="709" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.32.1600.868@0.32.1600.868" timestamp="1607116349969" />
+    <state x="546" y="182" width="424" height="483" key="FileChooserDialogImpl" timestamp="1607116370561">
+      <screen x="0" y="32" width="1600" height="868" />
+    </state>
+    <state x="546" y="182" key="FileChooserDialogImpl/0.32.1600.868@0.32.1600.868" timestamp="1607116370561" />
     <state x="546" y="184" width="424" height="483" key="FileChooserDialogImpl/0.34.1600.866@0.34.1600.866" timestamp="1605207112634" />
     <state x="95" y="146" width="824" height="507" key="IDE.errors.dialog" timestamp="1601310562499">
       <screen x="0" y="32" width="1024" height="736" />
     </state>
     <state x="95" y="146" width="824" height="507" key="IDE.errors.dialog/0.32.1024.736@0.32.1024.736" timestamp="1601310562499" />
-    <state x="0" y="34" width="1600" height="866" key="SettingsEditor" timestamp="1604153129589">
-      <screen x="0" y="34" width="1600" height="866" />
+    <state x="0" y="32" width="1600" height="866" key="SettingsEditor" timestamp="1607105949086">
+      <screen x="0" y="32" width="1600" height="868" />
     </state>
     <state x="2" y="35" key="SettingsEditor/0.32.1024.736@0.32.1024.736" timestamp="1600376956921" />
+    <state x="0" y="32" key="SettingsEditor/0.32.1600.868@0.32.1600.868" timestamp="1607105949086" />
     <state x="0" y="34" width="1600" height="866" key="SettingsEditor/0.34.1600.866@0.34.1600.866" timestamp="1604153129588" />
     <state x="273" y="100" width="1050" height="798" key="search.everywhere.popup" timestamp="1605728932313">
       <screen x="0" y="34" width="1600" height="866" />
