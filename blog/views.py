@@ -29,6 +29,7 @@ class ArticleDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form'] = CommentForm()
+        context['recommended'] = Article.objects.filter(tags__in=context['article'].tags.all())
         return context
 
 

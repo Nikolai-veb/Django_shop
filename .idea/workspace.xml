@@ -20,8 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="dca8e63a-e61b-487b-86f5-1af40ad9d613" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cosso/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Cosso/login/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Django_shop/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Django_shop/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/account/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/account/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop/templates/shop/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/shop/templates/shop/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
+>>>>>>> 3be24fed134594a9694c71f089c81001d2a31173
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,6 +91,9 @@
       </set>
     </option>
   </component>
+  <component name="ProblemsViewState">
+    <option name="showPreview" value="true" />
+  </component>
   <component name="ProjectId" id="1fGzm32Omepeejdb2mDDjKGZ0gd" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -89,8 +106,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/templates/registration" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+>>>>>>> 3be24fed134594a9694c71f089c81001d2a31173
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/registration" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
@@ -122,6 +149,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
+<<<<<<< HEAD
     <state x="258" y="124" width="1084" height="709" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607116349969">
       <screen x="0" y="32" width="1600" height="868" />
     </state>
@@ -131,6 +159,12 @@
     </state>
     <state x="546" y="182" key="FileChooserDialogImpl/0.32.1600.868@0.32.1600.868" timestamp="1607116370561" />
     <state x="546" y="184" width="424" height="483" key="FileChooserDialogImpl/0.34.1600.866@0.34.1600.866" timestamp="1605207112634" />
+=======
+    <state x="546" y="184" width="424" height="483" key="FileChooserDialogImpl" timestamp="1606070136026">
+      <screen x="0" y="34" width="1600" height="866" />
+    </state>
+    <state x="546" y="184" width="424" height="483" key="FileChooserDialogImpl/0.34.1600.866@0.34.1600.866" timestamp="1606070136026" />
+>>>>>>> 3be24fed134594a9694c71f089c81001d2a31173
     <state x="95" y="146" width="824" height="507" key="IDE.errors.dialog" timestamp="1601310562499">
       <screen x="0" y="32" width="1024" height="736" />
     </state>
