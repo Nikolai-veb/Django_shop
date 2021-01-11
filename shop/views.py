@@ -5,7 +5,7 @@ from blog.models import Article
 from .models import Category, Product, Review, Rating, ProductImages
 from .forms import ReviewForm, RatingForm, SorteProductForm
 from cart.forms import CartAddProductForm
-from account.models import Profile
+from account.models import CustomUser
 from django.db.models import Max, Min, Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.http import require_GET, require_POST
@@ -61,7 +61,7 @@ class ProductListView(PriceCategory, ListView):
         context = super().get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
         context['cart_product_form'] = CartAddProductForm()
-        context['profile'] = Profile.objects.all()
+        context['customer_user'] = CustomUser.objects.all()
         return context
 
 

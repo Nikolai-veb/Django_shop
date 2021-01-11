@@ -1,9 +1,25 @@
+from django.contrib.auth.admin import UserAdmin
+from .models import CustomUser
+from django.utils.translation import gettext_lazy as _
 from django.contrib import admin
-from .models import Profile
+from django.utils.safestring import mark_safe
 
 
-@admin.register(Profile)
-class ProfileAdmin(admin.ModelAdmin):
-    list_display = ('username', 'photo', 'date_birth')
-    list_filter = ('username', 'date_birth')
-    search_fields = ('username', 'date_birth')
+class UserNetAdmin(UserAdmin):
+    """Setting User Model """
+    list_display = ('username', 'email', "avatar", "get_image")
+    save_on_top = True
+    fieldsets = (
+        (None, {'fields': ('username', 'password')}),
+        (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+        (_('Permissions'), {
+            'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions'),
+        }),
+        (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+        (_('Personal info'), {'fields': ('avatar', 'date_birth')}),
+    )
+
+
+
+admin.site.register(CustomUser, UserNetAdmin)
+

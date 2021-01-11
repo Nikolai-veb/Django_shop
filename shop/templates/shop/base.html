@@ -53,7 +53,7 @@
                       <div class="topbar-option">
                         <div class="topbar-account">
                             {% if request.user.is_authenticated %}
-                                <a href="{% url "profile" user.id %}"><i class="icon-user f-15"></i></a>
+                                <a href="{% url "custom_users" user.id %}"><i class="icon-user f-15"></i></a>
                             {% else %}
                                 <a href="{% url "login_cast" %}"><i class="icon-user f-15"></i></a>
                              {% endif %}
@@ -193,12 +193,12 @@
 
                                         <ul class="dropdown-menu menu-level-1">
                                             {% if request.user.is_authenticated %}
-                                                {{ request.user.first_name   }}
+                                                {{ request.user.username }}
                                                 <li class="level2"><a href="{% url "logout" %}" title="Login">Выход</a></li>
                                                 {% else %}
                                                     <li class="level2"><a href="{% url "login_cast" %}" title="Login">Вход</a></li>
-                                                {% endif %}    
-                                                <li class="level2"><a href="{% url "register" %}" title="Register">Регистрацыя</a></li>
+                                                    <li class="level2"><a href="{% url "register" %}" title="Register">Регистрацыя</a></li>
+                                            {% endif %}
                                         </ul>
                                     </li>
 

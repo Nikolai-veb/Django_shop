@@ -1,27 +1,27 @@
 {% extends "shop/base.html" %}
 {% load static %}
-{% block title%}{{profiles.first_name}}{% endblock %}
+{% block title%}{{custom_user.first_name}}{% endblock %}
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-lg-3 col-sm-6">
+        <div class="col-5 col-3">
             <div class="card hovercard">
                 <div class="cardheader">
                 
                 </div>
                 <div class="avatar">
-                    <img src="{% if profile.photo %}{{ profiles.photo.url  }}{% else %}{% static "img/profile.webp" %}{% endif %}" alt="">
+                    <img src="{% if custom_user.avatar %}{{ custom_user.avatar.url }}{% else %}{% static "img/profile.webp" %}{% endif %}" width="300" height="300" alt="">
                 </div>
                 <div class="info">
                     <div class="title">
-                        <a target="_blank" href="#">{{ profiles.nikname  }}</a>
+                        <a target="_blank" href="#">{{ custom_user.username }}</a>
                     </div>
                     {% if request.user.is_authenticated %}
-                        <div class="desc">{{ request.user.first_name }} {{ request.user.last_name }} </div>
-                        <div class="desc">{{ request.user.email }}</div>
-                    <div class="desc"></div>
+                        <div class="desc">{{ request.user.first_name}} {{ request.user.last_name }} </div>
+                        <div class="desc">{{ request.user.date_birth}}</div>
+                        <div class="desc">{{request.user.email}}</div>
                     <div class="desc">
-                        <a href="{% url "edit" %}">Редактировать </a>
+                        <a href="{% url "edit" user.id %}">Edit</a>
                     </div>
                     {% endif %}
                 </div>

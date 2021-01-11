@@ -14523,7 +14523,7 @@ footer.footer-absolute .newletter-form .btn-submit i {
     position: relative;
     padding-top: 0;
     overflow: hidden;
-    text-align: center;
+    text-align: left;
     background-color: rgba(214, 224, 226, 0.2);
 }
 
@@ -14535,16 +14535,18 @@ footer.footer-absolute .newletter-form .btn-submit i {
 
 .card.hovercard .avatar{
     position: relative;
-    top: -50px;
+    top: -120px;
+    bottom: 100px;
+    left: 50px;
     margin-bottom: -50px;
 
 }
 
 .card.hovercard .avatar img{
-    width: 100px;
-    height: 100px;
-    max-width: 100px;
-    max-height: 100px;
+    width: 350px;
+    height: 350px;
+    max-width: 350px;
+    max-height: 350px;
 
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
@@ -14553,12 +14555,14 @@ footer.footer-absolute .newletter-form .btn-submit i {
 }
 
 .card.hovercard .info{
-    padding: 4px 8px 10px;
+    text-align: center;
+    padding: 2px 30px 50px;
+    margin: -390px 10px 100px 300px;
 }
 
 .card.hovercard .info .title {
     margin-bottom: 4px;
-    font-size: 24px;
+    font-size: 40px;
     line-height: 1;
     color: #262626;
     vertical-align: middle;
@@ -14566,7 +14570,7 @@ footer.footer-absolute .newletter-form .btn-submit i {
 
 .card.hovercard .info .desc {
     overflow: hidden;
-    font-size: 12px;
+    font-size: 20px;
     line-height: 20px;
     color: #737373;
     text-overflow: ellipsis;
@@ -14577,9 +14581,16 @@ footer.footer-absolute .newletter-form .btn-submit i {
     margin-bottom: 17px;
 }
 
-.btn {
-    border-right: 50%;
+.bottom{
+    padding: 26px 10px 10px 137px;
+    margin: 10px;
+}
 
+.btn {
+
+    border-right: 50%;
+    text-align: center;
     height: 32px;
     line-height: 18px;
 }
+
