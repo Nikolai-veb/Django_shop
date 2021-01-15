@@ -28,6 +28,16 @@ class CustomUserRegisterForm(forms.ModelForm):
             "date_birth": forms.DateInput(attrs={"class": "form-control border"})
         }
 
+    def is_valid(self):
+        image = super(CustomUserRegisterForm, self).is_valid()
+        image_avatar = self.cleaned_data['avatar']
+        expansion_avatar = (str(image_avatar).split('.')[-1])
+        expansions = ['jpeg', 'jpg', 'png']
+        if image_avatar and expansion_avatar not in expansions:
+            raise forms.ValidationError('Your file is not an image or has the wrong extension !!! \n Available extensions jpeg, jpg, png')
+        else:
+            return self.is_bound
+
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
@@ -36,14 +46,14 @@ class CustomUserRegisterForm(forms.ModelForm):
             raise forms.ValidationError('Пароль слишком короткий')
         return cd['password2']
 
-    def save( self, commit = True ) :
+    def save(self, commit=True) :
         # Save the provided password in hashed format
-        user = super(CustomUserRegisterForm, self ).save( commit = False )
-        user.set_password( self.cleaned_data[ "password" ] )
-        # my_group = Group.objects.get(name='Visitors')
-        # my_group.user_set.add(user)
+        user = super(CustomUserRegisterForm, self).save(commit=False)
+        user.set_password(self.cleaned_data[ "password" ])
+        my_group = Group.objects.get(name='Visitors')
         if commit:
             user.save()
+            # my_group.user_set.add(user)
         return user
 
 
@@ -61,3 +71,13 @@ class CustomUserEditForm(forms.ModelForm):
             "avatar": forms.FileInput(),
             "date_birth": forms.DateInput(attrs={"class": "form-control border"})
         }
+
+    def is_valid(self):
+        image = super(CustomUserEditForm, self).is_valid()
+        image_avatar = self.cleaned_data['avatar']
+        expansion_avatar = (str(image_avatar).split('.')[-1])
+        expansions = ['jpeg', 'jpg', 'png']
+        if image_avatar and expansion_avatar not in expansions:
+            raise forms.ValidationError('Your file is not an image or has the wrong extension !!! \n Available extensions jpeg, jpg, png')
+        else:
+            return self.is_bound
