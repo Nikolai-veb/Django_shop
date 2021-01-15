@@ -1,5 +1,3 @@
-from django.conf import settings
-from django.contrib.auth.models import User
 from django.db import models
 from django.urls import reverse
 import datetime
@@ -115,25 +113,4 @@ class Review(models.Model):
         return f'{self.name}-{self.product}'
 
 
-# class AbstractFavorit(models.Model):
-#         class Meta:
-#             abstract = True
 #
-#         user = models.ForeignKey(User, verbose_name="Пользователь", on_delete=models.CASCADE)
-#
-#         def __str__(self):
-#             return self.user.username
-#
-# class BookmarkProduct(AbstractFavorit):
-#         class Meta:
-#             db_table = "bookmark_product"
-#
-#         obj = models.ForeignKey(Product, verbose_name="Продукт", on_delete=models.CASCADE)
-#
-# class BookmarkReview(AbstractFavorit):
-#         class Meta:
-#             db_table = "bookmark_review"
-#
-#         obj = models.ForeignKey(Review, verbose_name="Комментарий", on_delete=models.CASCADE)
-
-

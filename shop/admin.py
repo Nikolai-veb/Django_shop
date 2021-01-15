@@ -19,7 +19,7 @@ class ProductImagesInline(admin.TabularInline):
 
     # Функыця отоброжения картинок в админке
     def get_image(self, odj):
-        return mark_safe(f'<img src={odj.images.url} widht="50" height="60">')
+        return mark_safe(f'<img src={odj.images.url} width="50" height="60">')
 
     get_image.short_description = "Изображение"
 
@@ -38,43 +38,41 @@ class ProductAdmin(admin.ModelAdmin):
     list_editable = ("draft",)
     search_fields = ("name", "price", "category")
     prepopulated_fields = {'slug': ('name', 'price')}
-    inlines = [ProductImagesInline,]
+    inlines = [ProductImagesInline, ]
     fieldsets = (
-        (None,{
-            "fields":(("name", "category"),)
+        (None, {
+            "fields": (("name", "category"),)
         }),
-        (None,{
-            "fields":("discription",)
+        (None, {
+            "fields": ("discription",)
         }),
-        (None,{
-            "fields":("slug",)
+        (None, {
+            "fields": ("slug",)
         }),
-        (None,{
-            "fields":("poster",)
+        (None, {
+            "fields": ("poster",)
         }),
-        (None,{
-            "fields":(("price", "stock", "draft"))
+        (None, {
+            "fields": (("price", "stock", "draft"))
         }),
-       # (None,{
-           # "fields":("create", "update")
-       # })
+        # (None,{
+        # "fields":("create", "update")
+        # })
     )
 
 
 @admin.register(ProductImages)
 class ProductImagesAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "product", "slug", "get_image")
-    list_display_links =("name",)
+    list_display_links = ("name",)
     readonly_fields = ("get_image",)
     list_filter = ("name", "product")
     search_fields = ("name", "product")
     prepopulated_fields = {'slug': ('name', 'product')}
 
-
-
     def get_image(self, odj):
         """Функцыя показа изображения"""
-        return mark_safe(f'<img src={odj.images.url} widht="100" height="110">')
+        return mark_safe(f'<img src={odj.images.url} width="100" height="110">')
 
     get_image.short_description = "Изображение"
 
@@ -89,4 +87,3 @@ class ReviewAdmin(admin.ModelAdmin):
     list_display = ("name", "email", "parent", "product", "create")
     list_filter = ("name", "email", "product", "create")
     search_fields = ("name", "product")
-

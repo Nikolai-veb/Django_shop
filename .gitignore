@@ -2,7 +2,6 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
 # C extensions
 *.so
 
@@ -20,11 +19,14 @@ lib64/
 parts/
 sdist/
 var/
-wheels/
+venv
+
+
+venv/wheels/
 *.egg-info/
 .installed.cfg
 *.egg
-Django_shop/settings.py
+
 # PyInstaller
 #  Usually these files are written by a python script from a template
 #  before PyInstaller builds the exe, so as to inject date/other infos into it.
@@ -115,5 +117,5 @@ media/
 .bundle/
 =======
 
-venv
+venv/
 >>>>>>> 11423e400f6a0c3edbc9abfbb5a2bf142654bf86

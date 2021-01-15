@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import OrderItem
 from .forms import OrderCraeteForm
 from cart.cart import Cart
+from .tasks import send_spam_email
 
 
 def order_create(request):
@@ -16,6 +17,8 @@ def order_create(request):
                                          product=item['product'],
                                          price=item['price'],
                                          quantity=item['quantity'])
+            cd = form.cleaned_data
+            send_spam_email.delay(cd['email'])
             # Очищаем корзину
             cart.clear()
             return render(request, 'order/order_created.html', {'order': order,})
