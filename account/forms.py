@@ -1,7 +1,7 @@
 from django import forms
 from  .models import CustomUser
 from django.contrib.auth.forms import AuthenticationForm
-
+from django.contrib.auth.models import Group
 
 class LoginForm(AuthenticationForm):
 
@@ -40,6 +40,8 @@ class CustomUserRegisterForm(forms.ModelForm):
         # Save the provided password in hashed format
         user = super(CustomUserRegisterForm, self ).save( commit = False )
         user.set_password( self.cleaned_data[ "password" ] )
+        # my_group = Group.objects.get(name='Visitors')
+        # my_group.user_set.add(user)
         if commit:
             user.save()
         return user

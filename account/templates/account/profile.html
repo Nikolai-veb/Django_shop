@@ -21,7 +21,7 @@
                         <div class="desc">{{ request.user.date_birth}}</div>
                         <div class="desc">{{request.user.email}}</div>
                     <div class="desc">
-                        <a href="{% url "edit" user.id %}">Edit</a>
+                        <a href="{% url 'edit' custom_user.id %}">Edit</a>
                     </div>
                     {% endif %}
                 </div>
