@@ -17,11 +17,7 @@ class ProductImagesInline(admin.TabularInline):
     extra = 1
     readonly_fields = ("get_image",)
 
-    # Функыця отоброжения картинок в админке
-    def get_image(self, odj):
-        return mark_safe(f'<img src={odj.images.url} width="50" height="60">')
 
-    get_image.short_description = "Изображение"
 
 
 @admin.register(Product)

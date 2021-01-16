@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import OrderItem
-from .forms import OrderCraeteForm
+from .forms import OrderCreatedForm
 from cart.cart import Cart
 from .tasks import send_spam_email
 
@@ -9,7 +9,7 @@ def order_create(request):
     """Обработчик заказов"""
     cart = Cart(request)
     if request.method == 'POST':
-        form = OrderCraeteForm(request.POST)
+        form = OrderCreatedForm(request.POST)
         if form.is_valid():
             order = form.save()
             for item in cart.inter():
@@ -23,5 +23,5 @@ def order_create(request):
             cart.clear()
             return render(request, 'order/order_created.html', {'order': order,})
     else:
-        form = OrderCraeteForm()
+        form = OrderCreatedForm()
         return render(request, 'order/order_create.html', {'cart': cart, 'form': form})

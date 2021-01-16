@@ -9,13 +9,13 @@ def send_spam_email(user_email):
     send(user_email)
 
 
-@app.task
-def send_much_letters():
-    for order in Order.objects.all():
-        send_mail(
-            'Вы подписались на рассылку',
-            'fwpefpwkfpowkepfk',
-            'nik.vagin1995@gmail.com',
-            [order.email],
-            fail_silently=False
-        )
+# @app.task
+# def send_much_letters():
+#     for order in Order.objects.all():
+#         send_mail(
+#             'Вы подписались на рассылку',
+#             'fwpefpwkfpowkepfk',
+#             'nik.vagin1995@gmail.com',
+#             [order.email],
+#             fail_silently=False
+#         )

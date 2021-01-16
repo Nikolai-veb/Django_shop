@@ -1,5 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
-
+from django.shortcuts import  get_object_or_404, redirect
 from .forms import CommentForm
 from .models import Article, Comment, Tag
 from django.views.generic import ListView, DetailView
@@ -7,7 +6,7 @@ from django.views.generic.base import View
 
 
 class ArticleListView(ListView):
-    """Обработчик статей"""
+    """Articles List"""
     model = Article
     template_name = "blog/article_list.html"
     context_object_name = "articles"
@@ -20,8 +19,9 @@ class ArticleListView(ListView):
         return queryset
 
 
+
 class ArticleDetailView(DetailView):
-    """Оработчик статьи"""
+    """Article Detail"""
     context_object_name = "article"
     model = Article
     id_field = "pk"
@@ -34,7 +34,7 @@ class ArticleDetailView(DetailView):
 
 
 class AddComment(View):
-    """Обработчик комментариев"""
+    """Comments"""
 
     def post(self, request, pk):
         article = Article.objects.get(id=pk, draft=False)
@@ -46,3 +46,4 @@ class AddComment(View):
             form.article = article
             form.save()
         return redirect(article.get_absolute_url())
+
