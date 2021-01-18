@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from blog.models import Article
 from .models import Category, Product, Review, Rating, ProductImages
-from .forms import ReviewForm, RatingForm, SorteProductForm
+from .forms import ReviewForm, RatingForm, SortedProductForm
 from cart.forms import CartAddProductForm
 from account.models import CustomUser
 from django.db.models import Max, Min, Q
@@ -99,7 +99,7 @@ class FilterProduct(PriceCategory, ListView):
         return context
 
 
-class SorteProduct(PriceCategory, ListView):
+class SortedProduct(PriceCategory, ListView):
     """Сортировка продукта"""
     template_name = "shop/product/product_list.html"
     context_object_name = "products"

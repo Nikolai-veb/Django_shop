@@ -1,9 +1,9 @@
-from django.shortcuts import  get_object_or_404, redirect
-from .forms import CommentForm
+from django.shortcuts import get_object_or_404, redirect, render
+from .forms import CommentForm, ShareArticleForm
 from .models import Article, Comment, Tag
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.base import View
-
+from .service import send
 
 class ArticleListView(ListView):
     """Articles List"""
@@ -17,7 +17,6 @@ class ArticleListView(ListView):
             tag = get_object_or_404(Tag, slug=tag_slug)
             queryset = Article.objects.filter(tags__in=[tag])
         return queryset
-
 
 
 class ArticleDetailView(DetailView):
@@ -47,3 +46,33 @@ class AddComment(View):
             form.save()
         return redirect(article.get_absolute_url())
 
+
+class FormShareEmailView(DetailView):
+    """Form Share Email"""
+    model = Article
+    context_object_name = "article"
+    pk_url_kwarg = 'pk'
+    template_name = "blog/share.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = ShareArticleForm()
+        return context
+
+
+class ShareEmailView(View):
+    """Handler and Send Email"""
+    def post(self, request, slug):
+        form = ShareArticleForm(request.POST)
+        article = get_object_or_404(Article, slug=slug)
+        if form.is_valid():
+            cd = form.cleaned_data
+            comment = cd['comments']
+            user_name = cd['name']
+            head = f'{article.title}'
+            body = f'{article.image} \n {article.body} \n This massage to {user_name}, \n {comment}'
+            user_email = cd['email']
+            send(head,body,user_email)
+        else:
+            form = ShareArticleForm()
+        return redirect("article_list")
