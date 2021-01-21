@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 import datetime
 from PIL import Image
+from django.utils.safestring import mark_safe
 from django.utils.text import slugify
 
 
@@ -10,7 +11,7 @@ from django.utils.text import slugify
 class Category(models.Model):
     """Категории"""
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50, unique=True)
+    slug = models.SlugField(max_length=50, unique=True, db_index=True)
 
     class Meta:
         verbose_name = "Категория"
@@ -30,7 +31,7 @@ class Product(models.Model):
     name = models.CharField("Название товара", max_length=150)
     poster = models.ImageField("Изображение", upload_to="posters/", blank=True, null=True)
     slug = models.SlugField(max_length=300, unique=True)
-    discription = models.TextField("Описание")
+    description = models.TextField("Описание")
     price = models.DecimalField("Цена", max_digits=10, decimal_places=2)
     stock = models.PositiveIntegerField("Склад", default=0)
     draft = models.BooleanField("Модераця", default=False)
@@ -64,6 +65,12 @@ class ProductImages(models.Model):
 
     def __str__(self):
         return self.name
+        # Функыця отоброжения картинок в админке
+
+    def get_image(self, odj):
+        return mark_safe(f'<img src={odj.images.url} width="50" height="60">')
+
+    get_image.short_description = "Изображение"
 
 
 class RatingStar(models.Model):

@@ -28,10 +28,10 @@ def cart_remove(request, product_id):
 def cart_detail(request):
     """Oбработчик для страницы списка товаров, добавленных в корзину"""
     cart = Cart(request)
-    products = cart.list_items()
-    for item in cart.inter():
-        item['update_quantity_form'] = CartAddProductForm(
-            initial={'quantity': item['quantity'],
+    for iteam in cart.inter():
+        iteam['update_quantity_form'] = CartAddProductForm(
+            initial={'quantity': iteam['quantity'],
                      'update': True}
         )
-    return render(request, 'cart/cart_detail.html', {'cart': cart, 'products': products})
+    print(dict(request.session))
+    return render(request, 'cart/cart_detail.html', {'cart': cart})

@@ -35,12 +35,13 @@ class Cart(object):
         product_id = str(product.id)
         if product_id in self.cart:
             del self.cart[product_id]
-            self.save()
+            if bool(self.cart) is not True:
+                del self.session['cart']
+        self.save()
 
     def inter(self):
         """Проходим по товарам корзины и получаем соответствующие объекты Product."""
         product_ids = [i for i in self.cart.keys()]
-
         # Получаем объекты модели Product и передаем их в корзину
         products = Product.objects.filter(id__in=product_ids)
         cart = self.cart.copy()
@@ -61,10 +62,6 @@ class Cart(object):
         """Возращает общую стоимость корзины"""
         return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
 
-    def list_items(self):
-        product_ids = self.cart.keys()
-        products = Product.objects.filter(id__in=product_ids)
-        return products
 
     def clear(self):
         """Очистка корзины"""

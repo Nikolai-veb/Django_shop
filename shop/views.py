@@ -3,27 +3,27 @@ from django.shortcuts import render, get_object_or_404, redirect
 
 from blog.models import Article
 from .models import Category, Product, Review, Rating, ProductImages
-from .forms import ReviewForm, RatingForm, SorteProductForm
+from .forms import ReviewForm, RatingForm, SortedProductForm
 from cart.forms import CartAddProductForm
 from account.models import CustomUser
 from django.db.models import Max, Min, Q
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.decorators.http import require_GET, require_POST
 from django.views.generic.base import View
 from django.views.generic import ListView, DetailView
-
 from django.contrib.postgres.search import TrigramSimilarity
 
 
 class Recommended:
     """Recommended products"""
 
-    def recommending(self, request):
+    def recommended(self, request):
         favorites = [f_products for f_products in dict(request.session)['favorite']]
         carts = [f_products for f_products in dict(request.session)['cart']]
-        product_id = list(set(favorites+carts))
-        products = [product.category for product in Product.objects.filter(id__in=product_id)]
-        r_product = Product.objects.filter(category__in=products)
+        if favorites and carts:
+            product_id = list(set(favorites + carts))
+            products = [product.category for product in Product.objects.filter(id__in=product_id)]
+            r_product = Product.objects.filter(category__in=products)
+        else:
+            r_product = Product.objects.all()
         return r_product
 
 
@@ -76,7 +76,7 @@ class ProductDetailView(PriceCategory, DetailView, Recommended):
         context["star_form"] = RatingForm()
         context["cart_product_form"] = CartAddProductForm()
         context["form"] = ReviewForm()
-        context["recommended"] = self.recommending(self.request)
+        context["recommended"] = self.recommended(self.request)
         return context
 
 
@@ -99,7 +99,7 @@ class FilterProduct(PriceCategory, ListView):
         return context
 
 
-class SorteProduct(PriceCategory, ListView):
+class SortedProduct(PriceCategory, ListView):
     """Сортировка продукта"""
     template_name = "shop/product/product_list.html"
     context_object_name = "products"

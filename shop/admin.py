@@ -17,11 +17,7 @@ class ProductImagesInline(admin.TabularInline):
     extra = 1
     readonly_fields = ("get_image",)
 
-    # Функыця отоброжения картинок в админке
-    def get_image(self, odj):
-        return mark_safe(f'<img src={odj.images.url} width="50" height="60">')
 
-    get_image.short_description = "Изображение"
 
 
 @admin.register(Product)
@@ -44,7 +40,7 @@ class ProductAdmin(admin.ModelAdmin):
             "fields": (("name", "category"),)
         }),
         (None, {
-            "fields": ("discription",)
+            "fields": ("description",)
         }),
         (None, {
             "fields": ("slug",)
@@ -53,7 +49,7 @@ class ProductAdmin(admin.ModelAdmin):
             "fields": ("poster",)
         }),
         (None, {
-            "fields": (("price", "stock", "draft"))
+            "fields": ("price", "stock", "draft")
         }),
         # (None,{
         # "fields":("create", "update")
@@ -69,12 +65,6 @@ class ProductImagesAdmin(admin.ModelAdmin):
     list_filter = ("name", "product")
     search_fields = ("name", "product")
     prepopulated_fields = {'slug': ('name', 'product')}
-
-    def get_image(self, odj):
-        """Функцыя показа изображения"""
-        return mark_safe(f'<img src={odj.images.url} width="100" height="110">')
-
-    get_image.short_description = "Изображение"
 
 
 @admin.register(RatingStar)

@@ -3,7 +3,7 @@ from django import forms
 from .models import Review, Rating, RatingStar, Product
 
 
-class SorteProductForm(forms.Form):
+class SortedProductForm(forms.Form):
     """Форма сортировки"""
     create = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={}))
     price = forms.BooleanField(required=False, widget=forms.CheckboxInput(attrs={}))

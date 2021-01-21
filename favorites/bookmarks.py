@@ -18,10 +18,6 @@ class Favorites(object):
         product_id = str(product.id)
         if product_id not in self.favorite:
             self.favorite[product_id] = {'quantity': 1, 'price': str(product.price)}
-        # if update_quantity:
-        # self.favorite[product_id]['quantity'] = quantity
-        # else:
-        #     self.favorite[product_id]['quantity'] += quantity
         self.save()
 
     def save(self):
@@ -33,6 +29,9 @@ class Favorites(object):
         product_id = str(product.id)
         if product_id in self.favorite:
             del self.favorite[product_id]
+            if bool(self.favorite) is not True:
+                del self.session['favorite']
+        print(dict(self.session))
         self.save()
 
     def inter(self):
@@ -46,7 +45,6 @@ class Favorites(object):
             favorite[str(product.id)]['product'] = product
         for item in favorite.values():
             item['price'] = Decimal(item['price'])
-            #     item['total_price'] = item['price'] * item['quantity']
             favorites.append(item)
         return favorites
 

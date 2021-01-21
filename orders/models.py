@@ -8,9 +8,9 @@ class Order(models.Model):
     last_name = models.CharField("Фамлия", max_length=50)
     email = models.EmailField("Email")
     city = models.CharField("Город проживания", max_length=50)
-    adress = models.CharField("Адрес доставки", max_length=250)
+    address = models.CharField("Адрес доставки", max_length=250)
     postal_code = models.CharField("Почтовый индекс", max_length=20)
-    paind = models.BooleanField("Оплаченно", default=False)
+    pained = models.BooleanField("Оплаченно", default=False)
     created = models.DateTimeField(auto_now_add=True)
     update = models.DateTimeField(auto_now=True)
 
@@ -20,7 +20,7 @@ class Order(models.Model):
         ordering = ["-created"]
 
     def __str__(self):
-        return 'Order %s '%(self.id)
+        return f'Order {self.id}'
 
     def get_total_cost(self):
         return sum(item.get_cost() for item in self.items.all())
@@ -34,7 +34,7 @@ class OrderItem(models.Model):
     quantity = models.PositiveIntegerField("Количество", default=0)
 
     def __str__(self):
-        return "{}".format(self.id)
+        return f"{self.id}"
 
     def get_cost(self):
         return self.price * self.quantity
