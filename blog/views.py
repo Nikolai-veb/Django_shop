@@ -19,6 +19,7 @@ class ArticleListView(ListView):
         return queryset
 
 
+
 class ArticleDetailView(DetailView):
     """Article Detail"""
     context_object_name = "article"

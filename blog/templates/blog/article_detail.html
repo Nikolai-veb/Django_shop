@@ -10,29 +10,10 @@
         <div class="row">
             <div class="col-xs-12 col-sm-5 col-md-6">
                 <div class="product-images">
-<!--                    <div class="main-img js-product-slider">-->
-<!--                        <a href="#" class="hover-images effect"><img src="{% static "img/bottle.jpg" %}" alt="photo" class="img-reponsive"></a>-->
+
                         <a href="#" class="hover-images effect"><img src="{% if article.image %}{{ article.image.url }}{% else %}{% static "img/bottle_3.jpg" %}{% endif %}" alt="photo" class="img-reponsive"></a>
-<!--                        <a href="#" class="hover-images effect"><img src="{% static "img/bottle2.jpg" %}" alt="photo" class="img-reponsive"></a>-->
-<!--                    </div>-->
+
                 </div>
-<!--                <div class="multiple-img-list-ver2 js-click-product">-->
-<!--&lt;!&ndash;                    <div class="product-col">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div class="img active">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <img src="{% static "img/bottle.jpg" %}"alt="images" class="img-responsive">&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                    <div class="product-col">-->
-<!--                        <div class="img">-->
-<!--                            <img src="{% static "img/bottle_3.jpg" %}" alt="images" class="img-responsive">-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--&lt;!&ndash;                    <div class="product-col">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div class="img">&ndash;&gt;-->
-<!--&lt;!&ndash;                            <img src="{% static "img/bottle2.jpg" %}"  alt="images" class="img-responsive">&ndash;&gt;-->
-<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                </div>-->
             </div>
             <div class="col-xs-12 col-sm-7 col-md-6">
                 <div class="single-product-info">
@@ -48,18 +29,17 @@
                     <h3 class="product-title">{{ article.title }}</h3>
 
                     <div class="categories">
-                                    {% for tag in article.tags.all %}
                         <div class="post-metas ver--grid">
-                            <a href="{% url "article_list_by_tag" tag.slug %}" rel="category tag">{{ tag.name  }}</a>
-
+                            {% for tag in article.tags.all %}
+                                <a href="{% url "article_list_by_tag" tag.slug %}" rel="category tag">{{ tag.name  }}</a>
+                            {% endfor %}
                         </div>
-                                    {% endfor %}
                                 <span class="post-comments-number">{{ article.tags.all.count }}</span>
 
                     </div>
 
 
-                    <p class="product-desc">{{ article.body }}</p>
+                    <p class="product-desc">{{ article.body|truncatechars:50|linebreaks}}</p>
                     <div class="share-social">
                         <span>Share :</span>
                         <a href="#"><i class="fa fa-twitter"></i></a>

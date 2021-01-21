@@ -21,18 +21,18 @@
                           {% for article in  articles %}
                     <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
                         <div class="blog-post-item item-grid">
-                            <a class="hover-images" href="{% url "article_detail"  article.id %}">
+                            <a class="hover-images" href="{{ article.get_absolute_url }}">
                                 <img src="{% if article.image %}{{ article.image.url }}{% else %}{% static "img/blog/grid_1.jpg" %}{% endif %}" alt="" class="img-reponsive" width="500" height="300" >
                             </a>
                             <a href="{% url "share" article.id %}">
                                 Share email
                             </a>
                                 <div class="categories">
-                                    {% for tag in article.tags.all %}
                             <div class="post-metas ver--grid">
+                                {% for tag in article.tags.all %}
                                   <a href="{% url "article_list_by_tag" tag.slug %}" rel="category tag">{{ tag.name }}</a>
+                                {% endfor %}
                             </div>
-                                    {% endfor %}
                                 <span class="post-comments-number">{{ article.tags.all.count }}</span>
 
                             </div>
