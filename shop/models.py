@@ -55,7 +55,7 @@ class Product(models.Model):
 class ProductImages(models.Model):
     """Изобржение продукта"""
     name = models.CharField("Имя", max_length=150)
-    images = models.ImageField("Изобраение", upload_to="product_images/", null=True, blank=True)
+    images = models.ImageField("Изображение", upload_to="product_images/", null=True, blank=True)
     slug = models.SlugField(max_length=150, unique=True)
     product = models.ForeignKey(Product, verbose_name="Товар", related_name="product_images", on_delete=models.CASCADE)
 
@@ -67,10 +67,14 @@ class ProductImages(models.Model):
         return self.name
         # Функыця отоброжения картинок в админке
 
-    def get_image(self, odj):
-        return mark_safe(f'<img src={odj.images.url} width="50" height="60">')
-
+    def get_image(self):
+        """The function of displaying pictures in the admin panel"""""
+        if self.images:
+            return mark_safe(f'<img src={self.images.url} width="50" height="60">')
+        else:
+            return '(Нет изображения)'
     get_image.short_description = "Изображение"
+    get_image.allow_tags = True
 
 
 class RatingStar(models.Model):

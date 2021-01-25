@@ -47,22 +47,26 @@
                                     <a href="{% url "product_list" %}" class="btn link-button hover-black continue">Продолжить покупки</a>
                                 </div>
                             </div>
-                        </div>
+                       </div>
+
                         <!-- End contact-form -->
                         <div class="col-md-4">
                             <h3>Купон</h3>
                             <div class="contact-form coupon">
-                                <form class="">
+
+                                    <form class="" action="{% url "apply"%}" method="post">
                                     <div class="form-group">
-                                        <input type="text" class="form-control input-cart" id="inputfname" placeholder="Coupon Code">
-                                        <button value="Submit" class="btn link-button link-button-v2 hover-white color-red" type="submit">Применить купон</button>
+                                            {{coupon_apply_form}}
+                                        <button value="Apply" class="btn link-button link-button-v2 hover-white color-red" type="submit">Применить купон</button>
+                                        {% csrf_token %}
                                     </div>
                                 </form>
+
                             </div>
                             <h3>Итоги корзины</h3>
                             <div class="text-price">
                                 <ul>
-                                    <li><span class="text">Промежуточный итог</span><span class="number">{{ cart.get_total_price   }}</span></li>
+                                    <li><span class="text">Промежуточный итог</span><span class="number">${{ cart.get_total_price|floatformat:"2"}}</span></li>
                                     <li><span class="text">Перевозка</span>
                                         <div class="payment">
                                             <form action="#">
@@ -80,7 +84,23 @@
                                             <input type="text" class="form-control input-cart" placeholder="Zipcode">
                                         </form>
                                     </li>
-                                    <li><span class="text">Итоги</span><span class="number">$89.00</span></li>
+                                    {% if cart.coupon %}
+                                    <li>
+                                            <span class="text">
+                                                    "{{ cart.coupon.code }}"({{ cart.coupon.discount|floatformat:"2" }}% off)
+                                            </span>
+                                            <span class="number">
+                                                    -${{ cart.get_discount|floatformat:"2" }}
+                                            </span>
+                                    </li>
+                                    <li>
+                                            <span class="text">Итоги</span><span class="number">${{ cart.get_total_price_after_discount|floatformat:"2" }}</span>
+                                    </li>
+                                    {% else %}
+                                    <li>
+                                            <span class="text">Итоги</span><span class="number">${{ cart.total_price|floatformat:"2" }}</span>
+                                    </li>
+                                    {% endif %}
                                 </ul>
                             </div>
                             <a class="btn link-button hover-white checkout" href="{% url "order_create" %}" title="Proceed to checkout">Перейти к оформлению заказа</a>
